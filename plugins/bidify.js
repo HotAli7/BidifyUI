@@ -187,7 +187,7 @@ export async function getNFTs() {
   // Filter to just tokens which are still in our custody
   const res = []
   const ids = {}
-  console.log(logs)
+  
   for (let log of logs) {
     
     if (log.topics.length < 4) {

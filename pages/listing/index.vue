@@ -118,7 +118,7 @@ export default {
       this.$nuxt.$loading.start()
       this.loading = true
 
-      await listings.get(this)
+      await listings.get(this, this.$router.history.current.query.s)
 
       this.loading = false
       this.$nuxt.$loading.finish()

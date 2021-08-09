@@ -116,7 +116,7 @@ async function addAssetsToNfts (nfts) {
  * @memberof listings
  */
 
-export async function get ({ $store }) {
+export async function get ({ $store }, searchKey) {
   const bidify = require('~/plugins/bidify.js')
 
   // get bidify listings
@@ -130,8 +130,15 @@ export async function get ({ $store }) {
   // get assets and merge data
   const assets = await addAssetsToListings(listings)
 
-  // commit to store
-  $store.commit('localStorage/listing', assets)
+  if (searchKey) {
+    const filteredListings = assets.filter((list) => {
+      return list.name.toLowerCase().includes(searchKey.toLowerCase())
+    })
+    // commit to store
+    $store.commit('localStorage/listing', filteredListings)
+  } else {
+    $store.commit('localStorage/listing', assets)
+  }
 }
 
 /**

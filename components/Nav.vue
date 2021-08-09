@@ -72,7 +72,7 @@
               ><span /></a>
               <form
                 class="rd-search"
-                action="search-results.html"
+                action="/listing"
                 data-search-live="rd-search-results-live"
                 method="GET"
               >
@@ -81,16 +81,15 @@
                 >
                   <div class="rd-mailform-inline-inner">
                     <div class="form-wrap form-wrap-icon mdi-magnify">
-                      <label
-                        class="form-label form-label"
-                        for="rd-navbar-search-form-input"
-                      >Search...</label>
                       <input
                         id="rd-navbar-search-form-input"
                         class="rd-navbar-search-form-input form-input"
                         type="text"
                         name="s"
                         autocomplete="off"
+                        placeholder="Search..."
+                        :value="this.$router.history.current.query.s"
+                        @input="inputSearchKey($event)"
                       >
                       <div class="rd-search-results-live" />
                     </div>
@@ -126,6 +125,11 @@ import BidifyIcon from '~/assets/logos/Bidify.svg?inline'
 
 export default {
   name: 'Connected',
+  data () {
+    return {
+      searchKey: ''
+    }
+  },
   components: {
     BidifyIcon
   },
@@ -166,6 +170,9 @@ export default {
       const wallets = require('~/plugins/wallets.js')
 
       wallets.manualDisconnect({ $store: this.$store, $notify: this.$notify })
+    },
+    inputSearchKey (e) {
+      this.searchKey = e.target.value
     },
     dark () {
       this.$colorMode.preference = 'dark'
