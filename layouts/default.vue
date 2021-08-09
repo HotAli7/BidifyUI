@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="!$device.isMobile?'desktop':'mobile'">
     <Nuxt v-if="(loaded && ready)" />
 
     <DialogNetwork />

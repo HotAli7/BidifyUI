@@ -1,5 +1,6 @@
 <template>
-  <div v-if="listing" class="container is-min-height">
+  <div v-if="listing" class="page">
+    <Nav />
     <ListingNav />
 
     <div class="contents">
@@ -143,7 +144,6 @@
     </div>
 
     <BidAction :listing="listing" />
-
   </div>
 </template>
 

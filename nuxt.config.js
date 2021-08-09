@@ -29,6 +29,10 @@ export default {
   dev: process.env.NODE_ENV !== 'production',
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    '@/assets/css/bootstrap.css',
+    '@/assets/css/style.css',
+    '@/assets/css/mdi.css',
+    '@/assets/css/fl-bigmug-line.css',
     '@/assets/styles/app.styl',
     '@/assets/styles/theme.styl',
     '@/assets/theme/index.css'
@@ -54,7 +58,7 @@ export default {
     openseaAssetsURL: process.env.OPENSEA_ASSETS_URL || '${openseaURL}assets',
     bidifyAddress: process.env.BIDIFY_ADDRESS || '0x451d44624D29874A0Ba90bD902D2BD95CCD3A48d',
     nftAddress: process.env.NFT_ADDRESS || '0x22315052952395e072469048330716659b27d857',
-    validChains: process.env.VALID_CHAINS || ['0x4', 'rinkeby', 4], //'0x1', 'main', 1,
+    validChains: process.env.VALID_CHAINS || ['0x4', 'rinkeby', 4], // '0x1', 'main', 1,
     chainNames: process.env.CHAIN_NAMES || ['Rinkeby'] // 'Mainnet'
   },
 
