@@ -1,38 +1,29 @@
 <template>
-  <div class="container is-min-height">
+  <div v-if="list.length" class="range range-30 range-xs-center" style="z-index:1;">
+    <div v-for="item in list" :key="item.index" class="cell-sm-6 cell-md-4 cell-lg-3 cell-xl-3">
+      <Card v-if="type === 'listing'" :item="item" />
+      <NFTCard v-if="type === 'nft'" :item="item" />
+    </div>
+  </div>
 
-    <div v-if="list.length" class="contents">
-      <div class="drop-grid">
-        <div class="drop-grid-item" v-for="item in list" :key="item.index">
+  <div v-else class="empty-state">
+    <div v-if="type === 'listing'">
+      No listings
 
-          <Card v-if="type === 'listing'" :item="item" />
-          <NFTCard v-if="type === 'nft'" :item="item" />
-
-        </div>
-      </div>
+      <small>
+        Check back soon.
+        <br>
+      </small>
     </div>
 
-    <div v-else class="empty-state">
-      <div v-if="type === 'listing'">
-        No listings
+    <div v-if="type === 'nft'">
+      No NFT's
 
-        <small>
-          Check back soon.
-          <br/>
-        </small>
-      </div>
-
-      <div v-if="type === 'nft'">
-        No NFT's
-
-        <small>
-          You haven't created any NFT's yet.
-          <br/>
-        </small>
-      </div>
-
+      <small>
+        You haven't created any NFT's yet.
+        <br>
+      </small>
     </div>
-
   </div>
 </template>
 

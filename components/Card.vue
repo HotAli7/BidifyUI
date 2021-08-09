@@ -1,31 +1,42 @@
 <template>
-  <el-card class="card is-themed" shadow="hover" :body-style="{ padding: '0px' }">
-    <NuxtLink class="card-image" :to="`/listing/${ item.id }/${ item.platform }/${ item.token }`">
-      <div class="card-image-spacing">
-        <img :src="item.image_preview_url" class="image">
-      </div>
-    </NuxtLink>
-
-    <div class="card-footer">
-      <div class="details">
-        <span class="title">{{ item.label }}</span>
-        <span class="meta">{{ item.nextBid }} ETH</span>
-      </div>
-
-      <el-popover
-        placement="top"
-        title="Auction"
-        width="240"
-        trigger="hover"
-        :content="`Ends in ${time}`">
-
-        <div slot="reference" class="action unlocked">
+  <div class="product product-counter product-auction">
+    <NuxtLink class="card-image" :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
+      <div class="product-counter-inner">
+        <div
+          class="countdown"
+          data-time="2017/10/10 14:34:56"
+          data-format="MM/DDHMS"
+          data-type="until"
+          data-layout="{dn} {dl} {hnn}{sep}{mnn}{sep}{snn}"
+        >
           {{ time }}
         </div>
-      </el-popover>
-
-    </div>
-  </el-card>
+      </div>
+      <div class="product-image">
+        <a
+          href="product-page.html"
+        ><img
+          :src="item.image_preview_url"
+          alt=""
+          style="width: 331px; height: 245px; object-fit: cover;"
+          width="331"
+          height="245"
+        ></a>
+      </div>
+      <div class="product-title">
+        <h5>
+          <a
+            href="product-page.html"
+          >{{ item.label }}</a>
+        </h5>
+      </div>
+      <div class="product-price-wrap">
+        <div class="product-price">
+          <h6>{{ item.nextBid }} ETH</h6>
+        </div>
+      </div>
+    </NuxtLink>
+  </div>
 </template>
 
 <script>

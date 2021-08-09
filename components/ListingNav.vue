@@ -13,11 +13,8 @@
         </small>
       </div>
 
-      <div class="spacer">
-
-      </div>
+      <div class="spacer" />
     </div>
-
   </div>
 </template>
 
@@ -36,7 +33,7 @@ export default {
   },
   computed: {
     path () {
-      return '/'
+      return '/listing'
     },
     date () {
       if (!this.listing) {

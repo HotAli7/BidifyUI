@@ -1,5 +1,6 @@
 <template>
-  <div v-if="listing" class="container is-min-height">
+  <div v-if="listing" class="page">
+    <Nav />
     <ListingNav />
 
     <div class="contents">
@@ -12,7 +13,7 @@
               </a>
             </div>
 
-            <el-carousel
+            <!-- <el-carousel
               trigger="click"
               :height="height"
               indicator-position="outside"
@@ -20,27 +21,26 @@
               class="is-themed"
               @change="carouselChange"
             >
-              <el-carousel-item v-for="item in listing.unlockables" :key="item.index">
-                <el-image
-                  v-if="item.image"
-                  style="width: 100%; height: 100%"
-                  class="image"
-                  :src="item.image"
-                  fit="scale-down"
-                />
+              <el-carousel-item v-for="item in listing.unlockables" :key="item.index"> -->
+            <el-image
+              v-if="listing.image_preview_url"
+              style="width: 100%; height: 100%"
+              class="image"
+              :src="listing.image_preview_url"
+              fit="scale-down"
+            />
 
-                <video
-                  v-if="item.video"
-                  :src="item.video"
-                  autoplay="true"
-                  controls="true"
-                  playsinline="true"
-                  style="width: 100%; height: 100%"
-                  loop="true"
-                />
-              </el-carousel-item>
-            </el-carousel>
-
+            <video
+              v-if="listing.video"
+              :src="listing.video"
+              autoplay="true"
+              controls="true"
+              playsinline="true"
+              style="width: 100%; height: 100%"
+              loop="true"
+            />
+            <!-- </el-carousel-item>
+            </el-carousel> -->
           </div>
         </el-col>
 
@@ -50,8 +50,12 @@
               {{ listing.label }}
             </h1>
 
-            <p v-if="listing.description" style="white-space: pre-line;">{{ listing.description }}</p>
-            <p v-else><em class="is-muted">This auction has no description</em></p>
+            <p v-if="listing.description" style="white-space: pre-line;">
+              {{ listing.description }}
+            </p>
+            <p v-else>
+              <em class="is-muted">This auction has no description</em>
+            </p>
 
             <div class="simple-list">
               <h5>
@@ -140,7 +144,6 @@
     </div>
 
     <BidAction :listing="listing" />
-
   </div>
 </template>
 

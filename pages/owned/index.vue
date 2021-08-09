@@ -1,23 +1,23 @@
 <template>
-  <div class="container is-themed">
+  <div class="page">
     <Nav />
 
-    <div class="heading">
-      <h2>
-        Your NFT Auctions
-      </h2>
-    </div>
+    <section class="section section-lg text-center">
+      <div class="shell-wide">
+        <h3>your nft auctions</h3>
+        <div class="divider divider-default" />
 
-    <Listings :list="owned" type="listing" />
+        <Listings :list="owned" type="listing" />
+      </div>
+    </section>
+    <section class="section section-lg text-center">
+      <div class="shell-wide">
+        <h3>not listed</h3>
+        <div class="divider divider-default" />
 
-    <div class="heading">
-      <h2>
-        Not Listed
-      </h2>
-    </div>
-
-    <Listings :list="nfts" type="nft" />
-
+        <Listings :list="nfts" type="nft" />
+      </div>
+    </section>
   </div>
 </template>
 

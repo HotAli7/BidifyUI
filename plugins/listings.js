@@ -54,8 +54,7 @@ async function addAssetsToListings (listings) {
   const assets = transformAssets(await seaport.getAssets(assetList))
 
   return listings.map((l) => {
-    let match = assets.find(t => t.address === l.platform && t.token === l.token_id)
-
+    let match = assets.find(t => t.address.toLowerCase() === l.platform.toLowerCase() && t.token_id === l.token)
     if (!match) {
       match = {
         label: `Bidify ${l.id}`,
@@ -66,7 +65,7 @@ async function addAssetsToListings (listings) {
       }
     }
 
-    return Object.assign({}, l, match)
+    return Object.assign({ listing_id: l.id }, l, match)
   })
 }
 
@@ -117,7 +116,7 @@ async function addAssetsToNfts (nfts) {
  * @memberof listings
  */
 
-export async function get ({ $store }) {
+export async function get ({ $store }, searchKey) {
   const bidify = require('~/plugins/bidify.js')
 
   // get bidify listings
@@ -131,8 +130,15 @@ export async function get ({ $store }) {
   // get assets and merge data
   const assets = await addAssetsToListings(listings)
 
-  // commit to store
-  $store.commit('localStorage/listing', assets)
+  if (searchKey) {
+    const filteredListings = assets.filter((list) => {
+      return list.name.toLowerCase().includes(searchKey.toLowerCase())
+    })
+    // commit to store
+    $store.commit('localStorage/listing', filteredListings)
+  } else {
+    $store.commit('localStorage/listing', assets)
+  }
 }
 
 /**

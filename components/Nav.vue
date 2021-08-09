@@ -1,86 +1,166 @@
 <template>
-  <div class="nav is-themed">
-    <NuxtLink class="nav-logo" to="/">
-      <span class="nav-logo-wrap">
-        <BidifyIcon class="logo-svg" />
-      </span>
-    </NuxtLink>
+  <!-- Page Header-->
+  <header class="section page-header">
+    <!-- RD Navbar-->
+    <div class="rd-navbar-wrap rd-navbar-shop-header">
+      <nav
+        class="rd-navbar rd-navbar-original rd-navbar-static"
+        data-layout="rd-navbar-fixed"
+        data-sm-layout="rd-navbar-fixed"
+        data-md-layout="rd-navbar-fullwidth"
+        data-md-device-layout="rd-navbar-fixed"
+        data-lg-layout="rd-navbar-static"
+        data-lg-device-layout="rd-navbar-static"
+        data-md-stick-up-offset="100px"
+        data-lg-stick-up-offset="150px"
+        data-stick-up="true"
+        data-sm-stick-up="true"
+        data-md-stick-up="true"
+        data-lg-stick-up="true"
+      >
+        <div class="rd-navbar-top-panel">
+          <div class="rd-navbar-nav-wrap">
+            <!-- RD Navbar Nav-->
+            <ul class="rd-navbar-nav">
+              <li :class="$router.history.current.path == '/'?'active':''">
+                <NuxtLink to="/">
+                  Home
+                </NuxtLink>
+              </li>
+              <li :class="$router.history.current.path == '/about'?'active':''">
+                <NuxtLink to="/about">
+                  About Us
+                </NuxtLink>
+              </li>
+              <li :class="$router.history.current.path == '/listing'?'active':''">
+                <NuxtLink to="/listing">
+                  Explore
+                </NuxtLink>
+              </li>
+              <li :class="$router.history.current.path == '/contacts'?'active':''">
+                <NuxtLink to="/contacts">
+                  Contacts
+                </NuxtLink>
+              </li>
+              <li>
+                <el-dropdown v-if="connected" trigger="click" @command="handleCommand">
+                  <el-button type="default" class="is-themed" :circle="true">
+                    <i class="el-icon-user" />
+                  </el-button>
+                  <el-dropdown-menu slot="dropdown" style="width: 280px;">
 
-    <div class="nav-actions">
-      <NuxtLink v-if="(!$device.isMobile && connected)" class="el-button el-button--text is-round is-themed" to="/">
-        <span>Explore</span>
-      </NuxtLink>
+                    <div class="balance">
+                      <div class="simple-list">
+                        <h5>
+                          Wallet
 
-      <NuxtLink v-if="(!$device.isMobile && connected)" class="el-button el-button--text is-round is-themed" to="/owned">
-        <span>My Auctions</span>
-      </NuxtLink>
+                        <span class="truncate">
+                            {{ address }}
+                          </span>
+                        </h5>
 
-      <NuxtLink v-if="(!$device.isMobile && connected)" class="el-button el-button--text is-round is-themed" to="/create">
-        <span>Create</span>
-      </NuxtLink>
+                        <div class="simple-list-item">
+                          <div class="label">
+                            <small>Balance</small>
 
-      <el-dropdown v-if="($device.isMobile  && connected)" trigger="click" @command="handleNavCommand" placement="bottom">
-        <el-button class="is-themed" :circle="true">
-          <i class="el-icon-more" />
-        </el-button>
-        <el-dropdown-menu slot="dropdown" style="width: 220px;">
-          <el-dropdown-item command="/">
-            Explore
-          </el-dropdown-item>
-          <el-dropdown-item command="/owned">
-            My Auctions
-          </el-dropdown-item>
-          <el-dropdown-item command="/create">
-            Create
-          </el-dropdown-item>
+                            <span>{{ balances.ether }} ETH</span>
+                          </div>
+                        </div>
 
-        </el-dropdown-menu>
-      </el-dropdown>
+                      </div>
+                    </div>
+                    <el-dropdown-item v-if="$colorMode.value === 'light'" divided command="dark">
+                      Dark Mode
+                    </el-dropdown-item>
+                    <el-dropdown-item v-if="$colorMode.value === 'dark'" divided command="light">
+                      Light Mode
+                    </el-dropdown-item>
+                    <el-dropdown-item divided command="disconnect">
+                      Disconnect
+                    </el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
 
-      <el-dropdown v-if="connected" trigger="click" @command="handleCommand">
-        <el-button type="default" class="is-themed" :circle="true">
-          <i class="el-icon-user" />
-        </el-button>
-        <el-dropdown-menu slot="dropdown" style="width: 280px;">
-
-          <div class="balance">
-            <div class="simple-list">
-              <h5>
-                Wallet
-
-               <span class="truncate">
-                  {{ address }}
-                </span>
-              </h5>
-
-              <div class="simple-list-item">
-                <div class="label">
-                  <small>Balance</small>
-
-                  {{ balances.ether }} <span>ETH</span>
-                </div>
-              </div>
-
+                <el-button v-else type="info" :round="true" @click="connect()">
+                  Connect
+                </el-button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="rd-navbar-inner">
+          <!-- RD Navbar Panel-->
+          <div class="rd-navbar-panel">
+            <!-- RD Navbar Toggle-->
+            <button
+              class="rd-navbar-toggle"
+              data-rd-navbar-toggle=".rd-navbar-nav-wrap"
+            >
+              <span />
+            </button>
+            <!-- RD Navbar Brand-->
+            <div class="rd-navbar-brand">
+              <NuxtLink class="brand-name" to="/">
+                <BidifyIcon class="logo-svg" />
+              </NuxtLink>
             </div>
           </div>
-          <el-dropdown-item v-if="$colorMode.value === 'light'" divided command="dark">
-            Dark Mode
-          </el-dropdown-item>
-          <el-dropdown-item v-if="$colorMode.value === 'dark'" divided command="light">
-            Light Mode
-          </el-dropdown-item>
-          <el-dropdown-item divided command="disconnect">
-            Disconnect
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-
-      <el-button v-else type="info" :round="true" @click="connect()">
-        Connect
-      </el-button>
-
+          <div class="rd-navbar-aside-center">
+            <!-- RD Navbar Search-->
+            <div class="rd-navbar-search">
+              <a
+                class="rd-navbar-search-toggle"
+                data-rd-navbar-toggle=".rd-navbar-search"
+                href="#"
+              ><span /></a>
+              <form
+                class="rd-search"
+                action="/listing"
+                data-search-live="rd-search-results-live"
+                method="GET"
+              >
+                <div
+                  class="rd-mailform-inline rd-mailform-sm rd-mailform-inline-modern"
+                >
+                  <div class="rd-mailform-inline-inner">
+                    <div class="form-wrap form-wrap-icon mdi-magnify">
+                      <input
+                        id="rd-navbar-search-form-input"
+                        class="rd-navbar-search-form-input form-input"
+                        type="text"
+                        name="s"
+                        autocomplete="off"
+                        placeholder="Search..."
+                        :value="this.$router.history.current.query.s"
+                        @input="inputSearchKey($event)"
+                      >
+                      <div class="rd-search-results-live" />
+                    </div>
+                    <button
+                      class="rd-search-form-submit rd-search-form-submit-icon mdi mdi-magnify"
+                    />
+                    <button
+                      class="rd-search-form-submit button form-button button-sm button-secondary"
+                    >search</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="rd-navbar-aside-right">
+            <div class="rd-navbar-shop">
+              <NuxtLink
+                class="rd-navbar-shop-icon mdi mdi-cart"
+                to="/owned"
+              >
+                <span>2</span>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -88,6 +168,11 @@ import BidifyIcon from '~/assets/logos/Bidify.svg?inline'
 
 export default {
   name: 'Connected',
+  data () {
+    return {
+      searchKey: ''
+    }
+  },
   components: {
     BidifyIcon
   },
@@ -128,6 +213,9 @@ export default {
       const wallets = require('~/plugins/wallets.js')
 
       wallets.manualDisconnect({ $store: this.$store, $notify: this.$notify })
+    },
+    inputSearchKey (e) {
+      this.searchKey = e.target.value
     },
     dark () {
       this.$colorMode.preference = 'dark'
