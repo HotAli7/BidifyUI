@@ -42,6 +42,49 @@
                   Contacts
                 </NuxtLink>
               </li>
+              <li>
+                <el-dropdown v-if="connected" trigger="click" @command="handleCommand">
+                  <el-button type="default" class="is-themed" :circle="true">
+                    <i class="el-icon-user" />
+                  </el-button>
+                  <el-dropdown-menu slot="dropdown" style="width: 280px;">
+
+                    <div class="balance">
+                      <div class="simple-list">
+                        <h5>
+                          Wallet
+
+                        <span class="truncate">
+                            {{ address }}
+                          </span>
+                        </h5>
+
+                        <div class="simple-list-item">
+                          <div class="label">
+                            <small>Balance</small>
+
+                            <span>{{ balances.ether }} ETH</span>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <el-dropdown-item v-if="$colorMode.value === 'light'" divided command="dark">
+                      Dark Mode
+                    </el-dropdown-item>
+                    <el-dropdown-item v-if="$colorMode.value === 'dark'" divided command="light">
+                      Light Mode
+                    </el-dropdown-item>
+                    <el-dropdown-item divided command="disconnect">
+                      Disconnect
+                    </el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+
+                <el-button v-else type="info" :round="true" @click="connect()">
+                  Connect
+                </el-button>
+              </li>
             </ul>
           </div>
         </div>
