@@ -1,28 +1,32 @@
 <template>
   <div>
-
     <el-drawer
       :visible.sync="bidCallout"
       :show-close="false"
-      :withHeader="false"
+      :with-header="false"
       size="132px"
       direction="btt"
       class="is-bid-callout"
       :modal="false"
       :modal-append-to-body="false"
       :append-to-body="false"
-      :wrapperClosable="false"
+      :wrapper-closable="false"
     >
       <div class="panel-action">
-        <a v-if="highBidder" class="el-button is-themed is-round">
-          You are the Highest Bidder
-        </a>
-        <a v-else-if="insufficientFunds" class="el-button is-themed is-round">
-          Insufficient Funds
-        </a>
-        <a v-else class="el-button is-themed is-round" @click="startBid()">
-          BID
-        </a>
+        <div class="output el-no-borderradius">
+          <a v-if="highBidder" class="el-button">
+            You are the Highest Bidder
+          </a>
+          <a v-else-if="insufficientFunds" class="el-button">
+            Insufficient Funds
+          </a>
+          <a v-else class="el-button" @click="startBid()">
+            BID
+          </a>
+          <a class="el-button el-bg-green" @click="finishBid()">
+            Finish
+          </a>
+        </div>
 
         <span v-if="listing.owned">
           {{ listing.nextBid }} ETH (Next Bid)
@@ -37,16 +41,15 @@
     <el-drawer
       :visible.sync="bidAction"
       :show-close="false"
-      :withHeader="false"
+      :with-header="false"
       size="80%"
       direction="btt"
       class="is-bid-action"
       :modal="true"
       :modal-append-to-body="false"
       :append-to-body="false"
-      :wrapperClosable="false"
+      :wrapper-closable="false"
     >
-
       <el-button class="btn-close is-themed" type="default" circle @click="cancelBid()">
         <i class="el-icon-close icon" />
       </el-button>
@@ -55,24 +58,19 @@
         <h3>Placing Your Bid</h3>
 
         <div class="action-step">
-
           <h4>Approve</h4>
 
           <p>
             Checking balance and approving
           </p>
-
         </div>
-
       </div>
 
       <div v-else class="panel-action">
         {{ error }}
       </div>
     </el-drawer>
-
   </div>
-
 </template>
 
 <script>
@@ -87,9 +85,6 @@ export default {
     return {
       time: 0
     }
-  },
-  mounted () {
-    this.timeLeft()
   },
   computed: {
     bidCallout () {
@@ -125,6 +120,9 @@ export default {
 
       return (balance < nextBid)
     }
+  },
+  mounted () {
+    this.timeLeft()
   },
   methods: {
     setTimeLeft (t) {
@@ -167,6 +165,18 @@ export default {
       }
 
       await listings.bid(payload)
+
+      await this.refetchListing()
+    },
+    async finishBid () {
+      const listings = require('~/plugins/listings.js')
+
+      const payload = {
+        $store: this.$store,
+        id: this.listing.listing_id
+      }
+
+      await listings.finishBid(payload)
 
       await this.refetchListing()
     },
@@ -214,10 +224,21 @@ export default {
       text-align center
       display block
       padding $space-s
+    .output
+      display flex
+      justify-content center
+      .el-button
+        width 100%
+        text-decoration none
 
-    .el-button
-      width 100%
-      text-decoration none
+        &.el-bg-green
+          background-color green
+          color white
+
+          &:hover
+            background-color #e7ffe7
+            border-color #c7ffc7
+            color green
 
   .btn-close
     position absolute

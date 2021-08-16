@@ -279,6 +279,29 @@ export async function bid ({ $store, id }) {
 }
 
 /**
+ * Finish a Listing to be Auction
+ * @name list
+ * @method
+ * @param {object} $store context
+ * @param {object} params for listing
+ * @memberof listings
+ */
+
+export async function finishBid ({ $store, id }) {
+  const bidify = require('~/plugins/bidify.js')
+
+  $store.commit('bidify/signing', true)
+
+  try {
+    await bidify.finish(id)
+  } catch (err) {
+    $store.commit('bidify/error', err.message)
+  }
+
+  $store.commit('bidify/signing', false)
+}
+
+/**
  * Mints an NFT (development only)
  * @name mint
  * @method
