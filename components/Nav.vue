@@ -28,9 +28,9 @@
                 </NuxtLink>
               </li>
               <li :class="$router.history.current.path == '/about'?'active':''">
-                <NuxtLink to="/about">
+                <a href="https://bidify.org/" target="_blank">
                   About Us
-                </NuxtLink>
+                </a>
               </li>
               <li :class="$router.history.current.path == '/listing'?'active':''">
                 <NuxtLink to="/listing">
