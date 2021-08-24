@@ -37,9 +37,9 @@
                   Explore
                 </NuxtLink>
               </li>
-              <li :class="$router.history.current.path == '/contacts'?'active':''">
-                <NuxtLink to="/contacts">
-                  Contacts
+              <li :class="$router.history.current.path == '/owned'?'active':''">
+                <NuxtLink to="/owned">
+                  My Auctions
                 </NuxtLink>
               </li>
               <li>
@@ -48,13 +48,12 @@
                     <i class="el-icon-user" />
                   </el-button>
                   <el-dropdown-menu slot="dropdown" style="width: 280px;">
-
                     <div class="balance">
                       <div class="simple-list">
                         <h5>
                           Wallet
 
-                        <span class="truncate">
+                          <span class="truncate">
                             {{ address }}
                           </span>
                         </h5>
@@ -66,15 +65,8 @@
                             <span>{{ balances.ether }} ETH</span>
                           </div>
                         </div>
-
                       </div>
                     </div>
-                    <el-dropdown-item v-if="$colorMode.value === 'light'" divided command="dark">
-                      Dark Mode
-                    </el-dropdown-item>
-                    <el-dropdown-item v-if="$colorMode.value === 'dark'" divided command="light">
-                      Light Mode
-                    </el-dropdown-item>
                     <el-dropdown-item divided command="disconnect">
                       Disconnect
                     </el-dropdown-item>
@@ -131,7 +123,7 @@
                         name="s"
                         autocomplete="off"
                         placeholder="Search..."
-                        :value="this.$router.history.current.query.s"
+                        :value="$router.history.current.query.s"
                         @input="inputSearchKey($event)"
                       >
                       <div class="rd-search-results-live" />
@@ -141,22 +133,13 @@
                     />
                     <button
                       class="rd-search-form-submit button form-button button-sm button-secondary"
-                    >search</button>
+                    > search </button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div class="rd-navbar-aside-right">
-            <div class="rd-navbar-shop">
-              <NuxtLink
-                class="rd-navbar-shop-icon mdi mdi-cart"
-                to="/owned"
-              >
-                <span>2</span>
-              </NuxtLink>
-            </div>
-          </div>
+          <div class="rd-navbar-aside-right" />
         </div>
       </nav>
     </div>
@@ -168,13 +151,13 @@ import BidifyIcon from '~/assets/logos/Bidify.svg?inline'
 
 export default {
   name: 'Connected',
+  components: {
+    BidifyIcon
+  },
   data () {
     return {
       searchKey: ''
     }
-  },
-  components: {
-    BidifyIcon
   },
   computed: {
     balances (type) {

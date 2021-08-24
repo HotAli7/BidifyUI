@@ -73,16 +73,12 @@
                   <br class="veil reveal-sm-inline">
                   and give, while discovering variety and affordability.
                 </p>
-                <a
-                  class="button button-secondary"
-                  href="registration-page.html"
-                >register now</a>
               </div>
             </div>
           </div>
           <div class="cell-lg-5 cell-xl-4">
             <div class="box-auction-wrap">
-              <div v-for="item in list.slice(0, 1)" :key="item.index" class="box-auction-minimal-left bg-gray-darker" :class="(item.index == 0)?'box-auction-minimal-left bg-gray-darker':'box-auction-minimal-right bg-secondary-2'">
+              <div v-for="item in list.slice(list.length - 1, list.length)" :key="item.index" class="box-auction-minimal-left bg-gray-darker" :class="(item.index == 0)?'box-auction-minimal-left bg-gray-darker':'box-auction-minimal-right bg-secondary-2'">
                 <div class="box-auction-inner">
                   <img
                     :src="item.image_preview_url"
@@ -102,7 +98,7 @@
                   </div>
                 </div>
               </div>
-              <div v-for="item in list.slice(1, 2)" :key="item.index" class="box-auction-minimal-right bg-secondary-2">
+              <div v-for="item in list.slice(list.length - 2, list.length - 1)" :key="item.index" class="box-auction-minimal-right bg-secondary-2">
                 <div class="box-auction-inner">
                   <img
                     :src="item.image_preview_url"
@@ -120,90 +116,6 @@
                     <p>Current Price</p>
                     <h6>{{ item.nextBid }} ETH</h6>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section section-lg text-center">
-        <div class="shell-wide">
-          <h3>how it works</h3>
-          <div class="divider divider-default" />
-          <div class="range range-xs-center range-50">
-            <div class="cell-sm-9 cell-md-6 cell-lg-3">
-              <div
-                class="thumbnail-classic unit unit-sm-horizontal unit-md-vertical unit-md-horizontal unit-lg-vertical"
-              >
-                <div class="thumbnail-classic-icon unit-left">
-                  <span class="icon">01</span>
-                </div>
-                <div class="thumbnail-classic-caption unit-body">
-                  <h6 class="thumbnail-classic-title">
-                    register
-                  </h6>
-                  <hr class="divider divider-default divider-sm">
-                  <p class="thumbnail-classic-text">
-                    To start using our auction, you’ll need to register. It’s
-                    completely free!
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="cell-sm-9 cell-md-6 cell-lg-3">
-              <div
-                class="thumbnail-classic unit unit-sm-horizontal unit-md-vertical unit-md-horizontal unit-lg-vertical"
-              >
-                <div class="thumbnail-classic-icon unit-left">
-                  <span class="icon">02</span>
-                </div>
-                <div class="thumbnail-classic-caption unit-body">
-                  <h6 class="thumbnail-classic-title">
-                    Buy or Bid
-                  </h6>
-                  <hr class="divider divider-default divider-sm">
-                  <p class="thumbnail-classic-text">
-                    You can instantly buy or place a bid on a desired product
-                    right after registration.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="cell-sm-9 cell-md-6 cell-lg-3">
-              <div
-                class="thumbnail-classic unit unit-sm-horizontal unit-md-vertical unit-md-horizontal unit-lg-vertical"
-              >
-                <div class="thumbnail-classic-icon unit-left">
-                  <span class="icon">03</span>
-                </div>
-                <div class="thumbnail-classic-caption unit-body">
-                  <h6 class="thumbnail-classic-title">
-                    Submit a Bid
-                  </h6>
-                  <hr class="divider divider-default divider-sm">
-                  <p class="thumbnail-classic-text">
-                    Submitting a bid is fast and easy. The process takes
-                    approximately 5 minutes.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="cell-sm-9 cell-md-6 cell-lg-3">
-              <div
-                class="thumbnail-classic unit unit-sm-horizontal unit-md-vertical unit-md-horizontal unit-lg-vertical"
-              >
-                <div class="thumbnail-classic-icon unit-left">
-                  <span class="icon">04</span>
-                </div>
-                <div class="thumbnail-classic-caption unit-body">
-                  <h6 class="thumbnail-classic-title">
-                    Win
-                  </h6>
-                  <hr class="divider divider-default divider-sm">
-                  <p class="thumbnail-classic-text">
-                    Easily win at our auction and enjoy owning the product you
-                    dream of.
-                  </p>
                 </div>
               </div>
             </div>
@@ -218,7 +130,7 @@
           <nuxt-link
             class="button button-secondary"
             to="listing"
-          >view all auctions</nuxt-link>
+          > view all auctions </nuxt-link>
         </div>
       </section>
       <!-- Page Footer-->
@@ -255,8 +167,11 @@ export default {
 
       this.$nuxt.$loading.start()
       this.loading = true
-
-      await listings.get(this)
+      try {
+        await listings.get(this)
+      } catch (error) {
+        console.log('error - ', error)
+      }
 
       this.loading = false
       this.$nuxt.$loading.finish()
