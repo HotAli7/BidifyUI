@@ -14,17 +14,17 @@
     >
       <div class="panel-action">
         <div class="output el-no-borderradius">
-          <a v-if="highBidder" class="el-button">
-            You are the Highest Bidder
-          </a>
-          <a v-else-if="insufficientFunds" class="el-button">
+          <a v-if="insufficientFunds && !listing.paidOut" class="el-button">
             Insufficient Funds
           </a>
-          <a v-else class="el-button" @click="startBid()">
+          <a v-else-if="!listing.paidOut" class="el-button" @click="startBid()">
             BID
           </a>
-          <a class="el-button el-bg-green" @click="finishBid()">
+          <a v-if="!listing.paidOut" class="el-button el-bg-green" @click="finishBid()">
             Finish
+          </a>
+          <a v-else class="el-button el-bg-red">
+            Finished
           </a>
         </div>
 
@@ -163,8 +163,11 @@ export default {
         $store: this.$store,
         id: this.listing.listing_id
       }
-
-      await listings.bid(payload)
+      try {
+        await listings.bid(payload)
+      } catch (error) {
+        console.log(error)
+      }
 
       await this.refetchListing()
     },
@@ -239,6 +242,10 @@ export default {
             background-color #e7ffe7
             border-color #c7ffc7
             color green
+
+        &.el-bg-red
+          background-color red
+          color white
 
   .btn-close
     position absolute

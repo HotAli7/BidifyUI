@@ -48,7 +48,7 @@ export default {
   data () {
     return {
       price: 0.1,
-      days: 5
+      days: 1
     }
   },
   computed: {

@@ -76,22 +76,29 @@ async function addAssetsToListings (listings) {
  * @param {array} nfts { platform, token } to transform
  * @memberof listings
  */
-
+function removeDuplications (assets) {
+  return assets.filter((asset, i) => {
+    if (i === 0) {
+      return true
+    }
+    return (asset.address !== assets[i - 1].address)
+  })
+}
 async function addAssetsToNfts (nfts) {
   const seaport = require('~/plugins/opensea.js')
 
-  const assetList = nfts.map((l) => {
+  const assetList = removeDuplications(nfts.map((l) => {
     return {
       token_id: l.token,
       address: l.platform
     }
-  })
+  }))
 
   const assets = transformAssets(await seaport.getAssets(assetList))
-
+  console.log(assets)
   return assetList.map((n, i) => {
     let match = assets.find((a) => {
-      return (a.address.toUpperCase() === n.address.toUpperCase()) && (a.token === n.token)
+      return (a.address.toUpperCase() === n.address.toUpperCase()) && (a.token_id === n.token_id)
     })
 
     if (!match) {
@@ -103,7 +110,6 @@ async function addAssetsToNfts (nfts) {
         }
       }
     }
-
     return Object.assign({}, n, match)
   })
 }
