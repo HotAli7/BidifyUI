@@ -62,7 +62,7 @@
                 Details
               </h5>
 
-              <a v-if="listing.owner" class="simple-list-item" :href="(`https://xxx.com/user/${listing.owner.address}`)" target="_blank">
+              <a v-if="listing.owner" class="simple-list-item" :href="(`https://opensea.io/${listing.owner.address}`)" target="_blank">
                 <el-avatar
                   v-if="listing.owner.profile_img_url"
                   :size="46"
@@ -104,7 +104,7 @@
 
               </a>
 
-              <a v-if="listing.creator" class="simple-list-item" :href="(`https://xxx.com/user/${listing.creator.address}`)" target="_blank">
+              <a v-if="listing.creator" class="simple-list-item" :href="(`https://opensea.io/${listing.creator.address}`)" target="_blank">
                 <el-avatar
                   v-if="listing.creator.profile_img_url"
                   :size="46"
@@ -206,6 +206,7 @@ export default {
 
       await listings.getOne(this)
 
+      console.log(this.$store.state.localStorage.listings.list)
       this.$nuxt.$loading.finish()
     }
   }
@@ -263,10 +264,10 @@ export default {
   .slide-text-title
     font-size 18px
 
-    .label
-      display block
-      font-size 14px
-      color $grey
+  .label
+    display block
+    font-size 12px
+    color $grey
 
   .el-carousel__item h3
     color #475669

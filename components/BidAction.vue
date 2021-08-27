@@ -14,16 +14,19 @@
     >
       <div class="panel-action">
         <div class="output el-no-borderradius">
-          <a v-if="insufficientFunds && !listing.paidOut" class="el-button">
+          <a v-if="highBidder && !listing.paidOut" class="el-button">
+            You are the Highest Bidder
+          </a>
+          <a v-else-if="insufficientFunds && !listing.paidOut" class="el-button">
             Insufficient Funds
           </a>
-          <a v-else-if="!listing.paidOut" class="el-button" @click="startBid()">
+          <a v-else-if="!listing.paidOut" class="el-button el-bg-green" @click="startBid()">
             BID
           </a>
-          <a v-if="!listing.paidOut" class="el-button el-bg-green" @click="finishBid()">
+          <a v-if="!listing.paidOut && !time" class="el-button el-bg-green" @click="finishBid()">
             Finish
           </a>
-          <a v-else class="el-button el-bg-red">
+          <a v-if="listing.paidOut" class="el-button el-bg-red">
             Finished
           </a>
         </div>
