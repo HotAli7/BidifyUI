@@ -78,6 +78,9 @@
           </div>
           <div class="cell-lg-5 cell-xl-4">
             <div class="box-auction-wrap">
+              <p class="heading-4 text-elight text-center">
+                Latest Listed Auctions
+              </p>
               <div v-for="item in list.slice(list.length - 1, list.length)" :key="item.index" class="box-auction-minimal-left bg-gray-darker" :class="(item.index == 0)?'box-auction-minimal-left bg-gray-darker':'box-auction-minimal-right bg-secondary-2'">
                 <div class="box-auction-inner">
                   <img

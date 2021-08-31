@@ -66,6 +66,8 @@ async function addAssetsToListings (listings) {
     }
 
     return Object.assign({ listing_id: l.id }, l, match)
+  }).filter((asset, i) => {
+    return (asset.image_url !== '')
   })
 }
 
@@ -95,7 +97,7 @@ async function addAssetsToNfts (nfts) {
   }))
 
   const assets = transformAssets(await seaport.getAssets(assetList))
-  console.log(assets)
+
   return assetList.map((n, i) => {
     let match = assets.find((a) => {
       return (a.address.toUpperCase() === n.address.toUpperCase()) && (a.token_id === n.token_id)
@@ -111,6 +113,8 @@ async function addAssetsToNfts (nfts) {
       }
     }
     return Object.assign({}, n, match)
+  }).filter((asset, i) => {
+    return (asset.image_url !== '')
   })
 }
 
