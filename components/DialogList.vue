@@ -89,10 +89,10 @@ export default {
         params
       })
 
+      this.cancel()
+
       await listings.getOwnedNFTs(this)
       await listings.getOwnedListings(this)
-
-      this.cancel()
 
       this.waiting = false
       return list

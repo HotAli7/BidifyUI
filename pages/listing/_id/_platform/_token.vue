@@ -206,7 +206,6 @@ export default {
 
       await listings.getOne(this)
 
-      console.log(this.$store.state.localStorage.listings.list)
       this.$nuxt.$loading.finish()
     }
   }
