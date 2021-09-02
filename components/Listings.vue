@@ -1,6 +1,6 @@
 <template>
   <div v-if="list.length" class="range range-30 range-xs-center" style="z-index:1;">
-    <div v-for="item in list" :key="item.index" class="cell-sm-6 cell-md-4 cell-lg-3 cell-xl-3">
+    <div v-for="item in list" :key="item.listing_id" class="cell-sm-6 cell-md-4 cell-lg-3 cell-xl-3">
       <Card v-if="type === 'listing'" :item="item" />
       <NFTCard v-if="type === 'nft'" :item="item" />
     </div>
