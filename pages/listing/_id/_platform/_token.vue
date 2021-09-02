@@ -115,8 +115,12 @@
                 <div class="label">
                   <small>Creator</small>
 
-                  <span class="truncate" :title="listing.creator.user.username">
+                  <span v-if="listing.creator.user" class="truncate" :title="listing.creator.user.username">
                     {{ listing.creator.user.username }}
+                  </span>
+
+                  <span v-else class="truncate" :title="listing.creator.address">
+                    {{ listing.creator.address }}
                   </span>
                 </div>
 

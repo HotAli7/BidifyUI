@@ -83,10 +83,12 @@
               </p>
               <div v-for="item in list.slice(list.length - 1, list.length)" :key="item.index" class="box-auction-minimal-left bg-gray-darker" :class="(item.index == 0)?'box-auction-minimal-left bg-gray-darker':'box-auction-minimal-right bg-secondary-2'">
                 <div class="box-auction-inner">
-                  <img
-                    :src="item.image_preview_url"
-                    alt=""
-                  >
+                  <NuxtLink :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
+                    <img
+                      :src="item.image_preview_url"
+                      alt=""
+                    >
+                  </NuxtLink>
                 </div>
                 <div class="box-auction-inner box-auction-inner-content">
                   <div class="box-auction-title">
@@ -103,10 +105,12 @@
               </div>
               <div v-for="item in list.slice(list.length - 2, list.length - 1)" :key="item.index" class="box-auction-minimal-right bg-secondary-2">
                 <div class="box-auction-inner">
-                  <img
-                    :src="item.image_preview_url"
-                    alt=""
-                  >
+                  <NuxtLink :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
+                    <img
+                      :src="item.image_preview_url"
+                      alt=""
+                    >
+                  </NuxtLink>
                 </div>
                 <div class="box-auction-inner box-auction-inner-content">
                   <div class="box-auction-title">

@@ -13,21 +13,17 @@
         </div>
       </div>
       <div class="product-image">
-        <a
-          href="product-page.html"
-        ><img
+        <img
           :src="item.image_preview_url"
           alt=""
           style="width: 331px; height: 245px; object-fit: cover;"
           width="331"
           height="245"
-        ></a>
+        >
       </div>
       <div class="product-title">
         <h5>
-          <a
-            href="product-page.html"
-          >{{ item.label }}</a>
+          {{ item.label }}
         </h5>
       </div>
       <div class="product-price-wrap">
