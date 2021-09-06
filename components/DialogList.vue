@@ -19,6 +19,13 @@
       <el-form-item label="Currency Address">
         <el-input v-model="currency" placeholder="enter currency token address ..." />
       </el-form-item>
+      <el-form-item>
+        <el-select v-model="currency" style="width: 100%">
+          <el-option v-for="(token, index) in tokenAddresses" :key="index" :value="token">
+            {{ tokens[token].symbol + ' - ' + tokens[token].name }}
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="Price">
         <el-input-number
           v-model="price"
@@ -48,7 +55,9 @@ export default {
       currency: '0x0000000000000000000000000000000000000000',
       price: 0.1,
       days: 1,
-      waiting: false
+      waiting: false,
+      tokens: {},
+      tokenAddresses: []
     }
   },
   computed: {
@@ -71,7 +80,22 @@ export default {
       }
     }
   },
+  async mounted () {
+    await this.fetchTokenData()
+  },
   methods: {
+    async fetchTokenData () {
+      await fetch('https://api.pancakeswap.info/api/v2/tokens', {
+
+      })
+        .then((response) => {
+          return response.json()
+        })
+        .then((response) => {
+          this.tokens = response.data
+          this.tokenAddresses = Object.keys(response.data)
+        })
+    },
     cancel () {
       this.$store.commit('bidify/listModal', false)
     },
