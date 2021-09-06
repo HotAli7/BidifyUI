@@ -16,6 +16,9 @@
       <el-form-item label="Token Id">
         <el-input v-model="form.token" placeholder="enter token id ..." />
       </el-form-item>
+      <el-form-item label="Currency Address">
+        <el-input v-model="currency" placeholder="enter currency token address ..." />
+      </el-form-item>
       <el-form-item label="Price">
         <el-input-number
           v-model="price"
@@ -42,6 +45,7 @@ export default {
   name: 'DialogList',
   data () {
     return {
+      currency: '0x0000000000000000000000000000000000000000',
       price: 0.1,
       days: 1,
       waiting: false
@@ -78,6 +82,7 @@ export default {
       const listModal = this.$store.state.bidify.listModal
 
       const params = {
+        currency: this.currency.toString(),
         platform: listModal.address,
         token: listModal.token_id,
         price: this.price.toString(),
