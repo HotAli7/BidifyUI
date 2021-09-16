@@ -352,13 +352,14 @@ export async function getListing (id) {
 
 export async function signBid (id, bidAmount) {
   let currency = (await getListing(id)).currency
+  let decimals = await getDecimals(currency)
 
   if (currency) {
     await (
       new web3.eth.Contract(ERC20JSON, currency)
-    ).methods.approve(settings.bidifyAddress, await Bidify.methods.getNextBid(id).call()).send({ from })
+    ).methods.approve(settings.bidifyAddress, atomic(bidAmount, decimals)).send({ from })
 
-    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', bidAmount).send({ from })
+    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', atomic(bidAmount, decimals)).send({ from })
   } else {
     return true
   }
@@ -374,11 +375,12 @@ export async function signBid (id, bidAmount) {
 
 export async function bid (id, bidAmount) {
   let currency = (await getListing(id)).currency
+  let decimals = await getDecimals(currency)
 
   if (currency) {
-    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', bidAmount).send({ from })
+    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', atomic(bidAmount, decimals)).send({ from })
   } else {
-    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', bidAmount).send({ from, value: await Bidify.methods.getNextBid(id).call() })
+    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', atomic(bidAmount, decimals)).send({ from, value: atomic(bidAmount, decimals) })
   }
 }
 
