@@ -41,6 +41,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui',
+    '@/plugins/bootstrap-vue',
     { src: '@/plugins/bidify', ssr: false, mode: 'client' },
     { src: '@/plugins/browser', ssr: false, mode: 'client' },
     { src: '@/plugins/element-ui' },
@@ -56,7 +57,7 @@ export default {
     infuraURL: process.env.INFURA_URL || 'https://rinkeby.infura.io/v3/96ffec68046b4148872ac3b0453d0b4f',
     openseaURL: process.env.OPENSEA_URL || 'https://rinkeby-api.opensea.io/api/v1/',
     openseaAssetsURL: process.env.OPENSEA_ASSETS_URL || '${openseaURL}assets',
-    bidifyAddress: process.env.BIDIFY_ADDRESS || '0x451d44624D29874A0Ba90bD902D2BD95CCD3A48d',
+    bidifyAddress: process.env.BIDIFY_ADDRESS || '0x138c81d54cbd016d524757d26bfdbf4addb8f808', //'0x451d44624D29874A0Ba90bD902D2BD95CCD3A48d',
     nftAddress: process.env.NFT_ADDRESS || '0x22315052952395e072469048330716659b27d857',
     validChains: process.env.VALID_CHAINS || ['0x4', 'rinkeby', 4], // '0x1', 'main', 1,
     chainNames: process.env.CHAIN_NAMES || ['Rinkeby'] // 'Mainnet'

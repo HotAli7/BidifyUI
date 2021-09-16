@@ -6,10 +6,12 @@ export const state = () => ({
   },
   listings: {
     list: [],
+    sortedList: [],
     owned: [],
     nfts: [],
     active: null,
-    expire: 0.5 // 30 minutes
+    expire: 0.5, // 30 minutes
+    totalPages: 0
   }
 })
 
@@ -29,6 +31,9 @@ export const mutations = {
   listing (state, list) {
     state.listings.list = list
   },
+  sortListing (state, list) {
+    state.listings.sortedList = list.sort((a, b) => b.bids.length - a.bids.length)
+  },
   owned (state, owned) {
     state.listings.owned = owned
   },
@@ -37,5 +42,8 @@ export const mutations = {
   },
   active (state, listing) {
     state.listings.active = listing
+  },
+  totalPages (state, totalPages) {
+    state.listings.totalPages = totalPages
   }
 }

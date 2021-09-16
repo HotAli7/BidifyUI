@@ -350,7 +350,7 @@ export async function getListing (id) {
  * @memberof Bidify
  */
 
-export async function signBid (id) {
+export async function signBid (id, bidAmount) {
   let currency = (await getListing(id)).currency
 
   if (currency) {
@@ -358,7 +358,7 @@ export async function signBid (id) {
       new web3.eth.Contract(ERC20JSON, currency)
     ).methods.approve(settings.bidifyAddress, await Bidify.methods.getNextBid(id).call()).send({ from })
 
-    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000').send({ from })
+    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', bidAmount).send({ from })
   } else {
     return true
   }
@@ -372,13 +372,13 @@ export async function signBid (id) {
  * @memberof Bidify
  */
 
-export async function bid (id) {
+export async function bid (id, bidAmount) {
   let currency = (await getListing(id)).currency
 
   if (currency) {
-    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000').send({ from })
+    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', bidAmount).send({ from })
   } else {
-    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000').send({ from, value: await Bidify.methods.getNextBid(id).call() })
+    await Bidify.methods.bid(id, '0x0000000000000000000000000000000000000000', bidAmount).send({ from, value: await Bidify.methods.getNextBid(id).call() })
   }
 }
 

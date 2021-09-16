@@ -1,157 +1,159 @@
 <template>
-  <div v-if="listing" class="page">
+  <div v-if="auction" class="page">
     <Nav />
-    <ListingNav />
-
-    <div class="contents">
-      <el-row :gutter="32">
-        <el-col :span="16" :xs="24">
-          <div class="drop-contents" :class="{ fs: isFullscreen }">
-            <div class="full-screen">
-              <a class="el-button el-button--default is-circle is-themed" @click="toggleFS()">
-                <i class="el-icon-full-screen" />
-              </a>
+    <section class="auction-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="auction-image">
+              <img
+                :src="auction.image_preview_url"
+                alt=""
+              >
             </div>
-
-            <!-- <el-carousel
-              trigger="click"
-              :height="height"
-              indicator-position="outside"
-              :autoplay="false"
-              class="is-themed"
-              @change="carouselChange"
-            >
-              <el-carousel-item v-for="item in listing.unlockables" :key="item.index"> -->
-            <el-image
-              v-if="listing.image_preview_url"
-              style="width: 100%; height: 100%"
-              class="image"
-              :src="listing.image_preview_url"
-              fit="scale-down"
-            />
-
-            <video
-              v-if="listing.video"
-              :src="listing.video"
-              autoplay="true"
-              controls="true"
-              playsinline="true"
-              style="width: 100%; height: 100%"
-              loop="true"
-            />
-            <!-- </el-carousel-item>
-            </el-carousel> -->
           </div>
-        </el-col>
-
-        <el-col :span="8" :xs="24">
-          <article v-if="listing" class="is-themed">
-            <h1>
-              {{ listing.label }}
-            </h1>
-
-            <p v-if="listing.description" style="white-space: pre-line;">
-              {{ listing.description }}
-            </p>
-            <p v-else>
-              <em class="is-muted">This auction has no description</em>
-            </p>
-
-            <div class="simple-list">
-              <h5>
-                Details
-              </h5>
-
-              <a v-if="listing.owner" class="simple-list-item" :href="(`https://opensea.io/${listing.owner.address}`)" target="_blank">
-                <el-avatar
-                  v-if="listing.owner.profile_img_url"
-                  :size="46"
-                  :src="listing.owner.profile_img_url"
-                  fit="cover"
-                />
-
-                <div v-if="listing.owner.user" class="label">
-                  <small>Owner</small>
-
-                  {{ listing.owner.user.username }}
-                </div>
-
-                <div v-else class="label">
-                  <small>Owner</small>
-
-                  <span class="truncate" :title="listing.owner.address">
-                    {{ listing.owner.address }}
-                  </span>
-                </div>
-
-              </a>
-
-              <a v-if="listing.collection" class="simple-list-item" :href="listing.collection.external_url" target="_blank">
-                <el-avatar
-                  v-if="listing.collection.image_url"
-                  :size="46"
-                  :src="listing.collection.image_url"
-                  fit="cover"
-                />
-
-                <div class="label">
-                  <small>Collection</small>
-
-                  <span class="truncate" :title="listing.collection.name">
-                    {{ listing.collection.name }}
-                  </span>
-                </div>
-
-              </a>
-
-              <a v-if="listing.creator" class="simple-list-item" :href="(`https://opensea.io/${listing.creator.address}`)" target="_blank">
-                <el-avatar
-                  v-if="listing.creator.profile_img_url"
-                  :size="46"
-                  :src="listing.creator.profile_img_url"
-                  fit="cover"
-                />
-
-                <div class="label">
-                  <small>Creator</small>
-
-                  <span v-if="listing.creator.user" class="truncate" :title="listing.creator.user.username">
-                    {{ listing.creator.user.username }}
-                  </span>
-
-                  <span v-else class="truncate" :title="listing.creator.address">
-                    {{ listing.creator.address }}
-                  </span>
-                </div>
-
-              </a>
-            </div>
-
-            <div v-if="(listing.traits && listing.traits.length)" class="simple-list">
-              <h5>
-                Traits
-              </h5>
-
-              <div v-for="trait in listing.traits" :key="(`${ trait.trait_type }${ trait.value }`)" class="simple-list-item">
-                <div class="label">
-                  <small>{{ trait.trait_type }}</small>
-
-                  <span class="truncate" :title="trait.value">
-                    {{ trait.value }}
-                  </span>
+          <div class="col-md-7">
+            <div class="auction-content">
+              <div class="auction-meta">
+                <h3 class="collection-name">
+                  {{ auction.collection.name }}
+                </h3>
+                <div class="social-share-links">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <img src="~/assets/logos/icon-material.svg" alt="">
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="~/assets/logos/icon-discord.svg" alt="">
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="~/assets/logos/icon-facebook.svg" alt="">
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="~/assets/logos/icon-instagram.svg" alt="">
+                      </a>
+                    </li>
+                    <li class="blank-back">
+                      <a href="#">
+                        <img src="~/assets/logos/icon-feather.svg" alt="">
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
+              <h3 class="auction-name">
+                {{ auction.name }}
+              </h3>
+              <h5 class="auction-status">
+                Auction {{ time }}
+              </h5>
+              <div class="auction-limit">
+                <div class="auction-limit-time">
+                  <span>{{ days }}</span>
+                  <span>{{ hours }}</span>
+                  <span>{{ minutes }}</span>
+                  <span>{{ seconds }}</span>
+                </div>
+                <div class="auction-limit-label">
+                  <span>Days</span>
+                  <span>Hours</span>
+                  <span>Minutes</span>
+                  <span>Seconds</span>
+                </div>
+              </div>
+              <div class="next-bid-amount">
+                <label for="test">Next Bidding Price:</label>
+                <b>{{ auction.nextBid }} ETH</b>
+              </div>
+              <div class="bid-action">
+                <span v-if="highBidder && !auction.paidOut" class="disabled">
+                  You are the Highest Bidder
+                </span>
+                <span v-else-if="insufficientFunds && !auction.paidOut" class="disabled">
+                  Insufficient Funds
+                </span>
+                <div v-else-if="!auction.paidOut && time !== 'Closed'" class="bid-box">
+                  <div class="bid-amount">
+                    <input v-model="bidAmount" type="text" class="bid-amount-input" placeholder="Enter amount of bid...">
+                  </div>
+                  <button type="button" class="btn bidify-button bid-button" @click="startBid()">
+                    place a bid
+                  </button>
+                </div>
+                <button v-if="!auction.paidOut && time === 'Closed'" class="btn bidify-button finish-button" @click="finishBid()">
+                  Finish
+                </button>
+                <span v-if="auction.paidOut">
+                  Finished
+                </span>
+              </div>
             </div>
-          </article>
-        </el-col>
-      </el-row>
-    </div>
-
-    <BidAction :listing="listing" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="auction-description">
+              <h4 class="description-title">
+                Description
+              </h4>
+              <p>{{ auction.description }}</p>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="auction-details">
+              <h4 class="details-title">
+                Details
+              </h4>
+              <p><span>Created</span><span>{{ auction.asset_contract.created_date }}</span></p>
+              <p><span>Downloadable File</span><span>Yes</span></p>
+              <p><span>Edition</span><span>DD Month YYYY</span></p>
+              <p><span>Contract Address</span><span>{{ auction.address.substr(0, 7) + "..." + auction.address.substr(auction.address.length - 4, 4) }}</span></p>
+              <p><span>Token ID</span><span>{{ auction.token_id }}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bidify-section bid-offers">
+      <div class="container">
+        <div class="bidify-data-section">
+          <div class="section-header">
+            <h5 class="section-title">
+              Bid Offers
+            </h5>
+            <span class="collapse">O</span>
+          </div>
+          <div class="section-container">
+            <table class="bidify-table">
+              <thead>
+                <tr>
+                  <th>Listed by:</th>
+                  <th>Price:</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(bid, index) in auction.bids" :key="index">
+                  <td>{{ bid.bidder }}</td>
+                  <td>{{ bid.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import RealtimeCountdown from 'realtime-countdown'
 const carouselHeight = (fs) => {
   if (fs) {
     return (window.screen.height - 230) + 'px'
@@ -164,9 +166,16 @@ export default {
   name: 'Listing',
   data () {
     return {
+      auction: null,
       current: 0,
       height: carouselHeight(),
-      isFullscreen: false
+      isFullscreen: false,
+      time: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      bidAmount: 0
     }
   },
   computed: {
@@ -182,6 +191,39 @@ export default {
       const id = this.$route.params.id
 
       return listings.find(l => l.id === id)
+    },
+    bidCallout () {
+      return (this.auction && !this.$store.state.bidify.bidding)
+    },
+    bidAction () {
+      return this.$store.state.bidify.bidding
+    },
+    error () {
+      return this.$store.state.bidify.error
+    },
+    highBidder () {
+      const account = this.$store.state.wallets.account
+      const highBidder = this.auction.highBidder
+
+      return ((account && highBidder) && (account.toLowerCase() === highBidder.toLowerCase()))
+    },
+    insufficientFunds () {
+      const balances = this.$store.state.wallets.balances
+      let balance = balances.ether
+      let nextBid = this.auction.nextBid
+
+      if (balance === 0) {
+        return true
+      }
+
+      if (!balance || !nextBid) {
+        return
+      }
+
+      balance = Number(balance)
+      nextBid = Number(nextBid)
+
+      return (balance < nextBid)
     }
   },
   watch: {
@@ -189,8 +231,9 @@ export default {
       this.getListing()
     }
   },
-  mounted () {
-    this.getListing()
+  async mounted () {
+    await this.getListing()
+    this.timeLeft()
   },
   beforeDestroy () {
     this.$store.commit('localStorage/active', null)
@@ -210,73 +253,71 @@ export default {
 
       await listings.getOne(this)
 
+      this.auction = this.$store.state.localStorage.listings.active
+      console.log(this.auction)
+      this.$nuxt.$loading.finish()
+    },
+    setTimeLeft (t) {
+      this.days = t.days
+      this.hours = t.hours
+      this.minutes = t.minutes
+      this.seconds = t.seconds
+      this.time = 'Open'
+    },
+    timeLeft () {
+      const timeStamp = this.$store.state.localStorage.listings.active.endTime * 1000
+
+      const onCountInitialized = t => this.setTimeLeft(t)
+
+      const onCount = t => this.setTimeLeft(t)
+
+      const onCountEnd = (t) => {
+        this.time = 'Closed'
+      }
+
+      return new RealtimeCountdown({ timeStamp, onCountInitialized, onCount, onCountEnd })
+    },
+    async startBid () {
+      const listings = require('~/plugins/listings.js')
+
+      const payload = {
+        $store: this.$store,
+        id: this.auction.listing_id,
+        bidAmount: this.bidAmount
+      }
+      try {
+        await listings.bid(payload)
+      } catch (error) {
+        console.log(error)
+      }
+
+      await this.refetchListing()
+    },
+    async finishBid () {
+      const listings = require('~/plugins/listings.js')
+
+      const payload = {
+        $store: this.$store,
+        id: this.auction.listing_id
+      }
+
+      await listings.finishBid(payload)
+
+      await this.refetchListing()
+    },
+    cancelBid () {
+      this.$store.commit('bidify/error', false)
+      this.$store.commit('bidify/bidding', false)
+    },
+    async refetchListing () {
+      const listings = require('~/plugins/listings.js')
+
+      this.$nuxt.$loading.start()
+
+      await listings.getOne(this)
+
       this.$nuxt.$loading.finish()
     }
   }
 }
 </script>
-
-<style scoped lang="stylus">
-  .container
-    padding-bottom 132px
-
-  .fs
-    position fixed !important
-    top 0
-    left 0
-    width 100%
-    height 100%
-    z-index 999999
-
-  .contents
-    position relative
-    z-index 2000
-    padding 64px 0
-    width 80%
-    margin auto
-    overflow hidden
-
-    +for_breakpoint(xs sm)
-      width 100%
-      padding 0
-
-      article
-        padding $space-m
-
-  .drop-contents
-    padding 0 0
-    position relative
-
-  .full-screen
-    position absolute
-    right $space-s
-    top $space-s
-    z-index 999
-
-  .image
-    max-width 100%
-
-  .slide-text
-    padding $space-m
-    margin $space-m 0
-    text-align left
-    display flex
-    justify-content space-between
-    align-items center
-
-  .slide-text-title
-    font-size 18px
-
-  .label
-    display block
-    font-size 12px
-    color $grey
-
-  .el-carousel__item h3
-    color #475669
-    font-size 14px
-    opacity 0.75
-    line-height 150px
-    margin 0
-
-</style>

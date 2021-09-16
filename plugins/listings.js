@@ -126,9 +126,10 @@ async function addAssetsToNfts (nfts) {
  * @memberof listings
  */
 
-export async function get ({ $store }, searchKey) {
+export async function get ({ $store, $route }) {
   const bidify = require('~/plugins/bidify.js')
-
+  const searchKey = $route.query.s
+  const pageNumber = $route.params.number
   // get bidify listings
   const listings = await bidify.getListings()
 
@@ -144,9 +145,19 @@ export async function get ({ $store }, searchKey) {
     const filteredListings = assets.filter((list) => {
       return list.name.toLowerCase().includes(searchKey.toLowerCase())
     })
+    const slicedListings = filteredListings.slice((pageNumber - 1) * 8, (pageNumber * 8))
     // commit to store
-    $store.commit('localStorage/listing', filteredListings)
+    $store.commit('localStorage/totalPages', Math.ceil(filteredListings.length / 8))
+    $store.commit('localStorage/sortListing', slicedListings)
+    $store.commit('localStorage/listing', slicedListings)
+  } else if (pageNumber) {
+    const slicedListings = assets.slice((pageNumber - 1) * 8, (pageNumber * 8))
+    // commit to store
+    $store.commit('localStorage/totalPages', Math.ceil(assets.length / 8))
+    $store.commit('localStorage/sortListing', slicedListings)
+    $store.commit('localStorage/listing', slicedListings)
   } else {
+    $store.commit('localStorage/sortListing', assets)
     $store.commit('localStorage/listing', assets)
   }
 }
@@ -263,13 +274,13 @@ export async function list ({ $store, params }) {
  * @memberof listings
  */
 
-export async function bid ({ $store, id }) {
+export async function bid ({ $store, id, bidAmount }) {
   const bidify = require('~/plugins/bidify.js')
 
   $store.commit('bidify/signing', true)
 
   try {
-    await bidify.signBid(id)
+    await bidify.signBid(id, bidAmount)
   } catch (err) {
     $store.commit('bidify/error', err.message)
     return
@@ -279,7 +290,7 @@ export async function bid ({ $store, id }) {
   $store.commit('bidify/signing', false)
 
   try {
-    await bidify.bid(id)
+    await bidify.bid(id, bidAmount)
   } catch (err) {
     $store.commit('bidify/error', err.message)
     return

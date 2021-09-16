@@ -54,90 +54,105 @@
     <!-- Page-->
     <div v-if="list" class="page">
       <Nav />
-      <section class="section">
-        <div class="range range-condensed">
-          <div class="cell-lg-7 cell-xl-8 reveal-lg-flex">
-            <div class="box-auction-large-left bg-primary">
-              <div class="box-auction-large-inner">
-                <div class="heading-group">
-                  <p class="heading-3 text-elight">
-                    online
-                  </p>
-                  <h1>auction</h1>
-                  <p class="heading-3 text-elight">
-                    for the whole family
-                  </p>
-                </div>
-                <p class="heading-5">
-                  Online Auction is where everyone goes to shop, sell,
-                  <br class="veil reveal-sm-inline">
-                  and give, while discovering variety and affordability.
-                </p>
+      <section class="section hero">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="hero-content">
+                <h1>The Best Place to Bid, Buy and Sell Valued <span>NFTs</span></h1>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
               </div>
             </div>
-          </div>
-          <div class="cell-lg-5 cell-xl-4">
-            <div class="box-auction-wrap">
-              <p class="heading-4 text-elight text-center">
-                Latest Listed Auctions
-              </p>
-              <div v-for="item in list.slice(list.length - 1, list.length)" :key="item.index" class="box-auction-minimal-left bg-gray-darker" :class="(item.index == 0)?'box-auction-minimal-left bg-gray-darker':'box-auction-minimal-right bg-secondary-2'">
-                <div class="box-auction-inner">
-                  <NuxtLink :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
-                    <img
-                      :src="item.image_preview_url"
-                      alt=""
-                    >
-                  </NuxtLink>
-                </div>
-                <div class="box-auction-inner box-auction-inner-content">
-                  <div class="box-auction-title">
-                    <NuxtLink :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
-                      {{ item.name }}
-                    </NuxtLink>
-                  </div>
-                  <div class="divider divider-secondary divider-sm" />
-                  <div class="product-price">
-                    <p>Current Price</p>
-                    <h6>{{ item.nextBid }} ETH</h6>
-                  </div>
-                </div>
-              </div>
-              <div v-for="item in list.slice(list.length - 2, list.length - 1)" :key="item.index" class="box-auction-minimal-right bg-secondary-2">
-                <div class="box-auction-inner">
-                  <NuxtLink :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
-                    <img
-                      :src="item.image_preview_url"
-                      alt=""
-                    >
-                  </NuxtLink>
-                </div>
-                <div class="box-auction-inner box-auction-inner-content">
-                  <div class="box-auction-title">
-                    <NuxtLink :to="`/listing/${ item.listing_id }/${ item.platform }/${ item.token }`">
-                      {{ item.name }}
-                    </NuxtLink>
-                  </div>
-                  <div class="divider divider-secondary divider-sm" />
-                  <div class="product-price">
-                    <p>Current Price</p>
-                    <h6>{{ item.nextBid }} ETH</h6>
-                  </div>
-                </div>
+            <div class="col-md-5">
+              <div class="hero-image">
+                <img src="~/assets/images/hero-image.png" alt="hero image">
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section class="section section-lg bg-gray-lighter text-center">
-        <div class="shell shell-wide">
-          <h3>Current Auctions</h3>
-          <div class="divider divider-default" />
-          <Listings :list="list" type="listing" />
+      <div class="logo-container container">
+        <div class="logo">
+          <img src="~/assets/images/logo.png" alt="Bidify">
+        </div>
+      </div>
+      <section class="section live-auction">
+        <div class="container">
+          <span class="section-sub-title">Bid, Buy and Sell</span>
+          <h3 class="section-title">
+            Live Auctions
+          </h3>
+          <p class="section-description fixed-width">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+          </p>
+          <div class="live-auctions auction-list">
+            <div class="row">
+              <div v-for="item in liveAuction" :key="item.listing_id" class="col-md-3">
+                <CardB :item="item" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section about">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <h3 class="section-title">
+                About
+              </h3>
+              <p class="section-description">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+              </p>
+              <p class="section-description">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <div class="about-image">
+                <img src="~/assets/images/about-image.png" alt="About Image">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section most-popular">
+        <div class="container">
+          <span class="section-sub-title">Top Collections</span>
+          <h3 class="section-title">
+            Most Popular
+          </h3>
+          <p class="section-description fixed-width">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+          </p>
+          <div class="popular-auctions auction-list">
+            <div class="row">
+              <div v-for="item in popularAuction" :key="item.listing_id" class="col-md-3">
+                <Card :item="item" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section new-arrivals">
+        <div class="container">
+          <span class="section-sub-title">Marketplace</span>
+          <h3 class="section-title">
+            New Arrivals
+          </h3>
+          <div class="new-auctions auction-list mb-4">
+            <div class="row">
+              <div v-for="item in list.slice(list.length - 4, list.length)" :key="item.listing_id" class="col-md-3">
+                <CardB :item="item" />
+              </div>
+            </div>
+          </div>
           <nuxt-link
-            class="button button-secondary"
-            to="listing"
-          > view all auctions </nuxt-link>
+            class="btn bidify-button"
+            to="listing/page/1"
+          >
+            view all auctions
+          </nuxt-link>
         </div>
       </section>
       <!-- Page Footer-->
@@ -155,12 +170,24 @@ export default {
   name: 'Home',
   data () {
     return {
-      loading: true
+      loading: true,
+      auctions: []
     }
   },
   computed: {
     list () {
       return this.$store.state.localStorage.listings.list
+    },
+    liveAuction () {
+      const currentTime = new Date().getTime()
+      const liveAuctions = this.$store.state.localStorage.listings.list.filter((auction, i) => {
+        return (auction.endTime > currentTime)
+      })
+      return liveAuctions.length < 5 ? liveAuctions : liveAuctions.slice(liveAuctions.length - 4, liveAuctions.length)
+    },
+    popularAuction () {
+      const popularAuctions = this.$store.state.localStorage.listings.sortedList
+      return popularAuctions.length < 5 ? popularAuctions : popularAuctions.slice(0, 4)
     }
   },
   mounted () {

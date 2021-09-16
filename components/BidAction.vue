@@ -20,9 +20,13 @@
           <a v-else-if="insufficientFunds && !listing.paidOut" class="el-button disabled">
             Insufficient Funds
           </a>
-          <a v-else-if="!listing.paidOut && time !== 'Ended'" class="el-button el-bg-green" @click="startBid()">
-            BID
-          </a>
+          <div v-else-if="!listing.paidOut && time !== 'Ended'" class="bid-box">
+            <label class="el-form-item__label">Bid Amount</label>
+            <input v-model="bidAmount" type="text" placeholder="enter the amount ..." class="el-input__inner"></input>
+            <a class="el-button el-bg-green" @click="startBid()">
+              BID
+            </a>
+          </div>
           <a v-if="!listing.paidOut && time === 'Ended'" class="el-button el-bg-green" @click="finishBid()">
             Finish
           </a>
@@ -86,7 +90,8 @@ export default {
   },
   data () {
     return {
-      time: 0
+      time: 0,
+      bidAmount: 0
     }
   },
   computed: {

@@ -54,40 +54,100 @@
     <!-- Page-->
     <div v-if="owned" class="page">
       <Nav />
-
-      <!-- Breadcrumbs-->
-      <section class="breadcrumbs-custom breadcrumbs-custom-svg bg-gradient breadcrumbs-background-01">
-        <div class="shell">
-          <p class="breadcrumbs-custom-subtitle">
-            Auction Catalog
-          </p>
-          <p class="heading-1 breadcrumbs-custom-title">
-            Explore
-          </p>
-          <ul class="breadcrumbs-custom-path">
-            <li>Home</li>
-            <li class="active">
-              Explore
+      <section class="section hero listing" />
+      <section class="section hero-container">
+        <div class="container">
+          <div class="listing-logo">
+            <div class="logo-image">
+              <img src="~/assets/logos/listing-logo.svg" alt="Listing Logo">
+            </div>
+          </div>
+          <div class="hero-content mt-3">
+            <h1>My Auctions</h1>
+            <p class="section-description fixed-width">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section filter-section">
+        <div class="social-links">
+          <ul>
+            <li>
+              <a href="#">
+                <img src="~/assets/logos/icon-material.svg" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="~/assets/logos/icon-discord.svg" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="~/assets/logos/icon-facebook.svg" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="~/assets/logos/icon-instagram.svg" alt="">
+              </a>
+            </li>
+            <li class="blank-back">
+              <a href="#">
+                <img src="~/assets/logos/icon-feather.svg" alt="">
+              </a>
             </li>
           </ul>
         </div>
-      </section>
-
-      <!-- product catalog-->
-      <section class="section section-lg text-center">
-        <div class="shell-wide">
-          <h3>your nft auctions</h3>
-          <div class="divider divider-default" />
-
-          <Listings :list="owned" type="listing" />
+        <div class="filter-options">
+          <div class="search-box">
+            <form
+              class="search-form"
+              action="/listing/page/1"
+              method="GET"
+            >
+              <div class="form-wrap form-wrap-icon">
+                <input
+                  id="search-form-input"
+                  class="search-form-input"
+                  type="text"
+                  name="s"
+                  autocomplete="off"
+                  placeholder="Search..."
+                  :value="$router.history.current.query.s"
+                >
+                <button class="search-button">
+                  <img src="~/assets/logos/icon-search.svg" alt="">
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
-      <section class="section section-lg text-center">
-        <div class="shell-wide">
-          <h3>not listed</h3>
-          <div class="divider divider-default" />
-
-          <Listings :list="nfts" type="nft" />
+      <section class="section new-arrivals">
+        <div class="container">
+          <div class="new-auctions auction-list mb-4">
+            <div class="row">
+              <div v-for="item in owned" :key="item.listing_id" class="col-md-3">
+                <Card :item="item" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section new-arrivals">
+        <div class="container">
+          <div class="new-auctions auction-list mb-4">
+            <h3 class="section-title">
+              Not Listed
+            </h3>
+            <div class="row">
+              <div v-for="item in nfts" :key="item.listing_id" class="col-md-3">
+                <NFTCard :item="item" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!-- Page Footer-->
@@ -127,7 +187,7 @@ export default {
 
       this.$nuxt.$loading.start()
       this.loading = true
-      
+
       try {
         await listings.getOwnedListings(this)
         await listings.getOwnedNFTs(this)

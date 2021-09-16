@@ -104,7 +104,7 @@
           <div class="search-box">
             <form
               class="search-form"
-              action="/listing"
+              action="/listing/page/1"
               method="GET"
             >
               <div class="form-wrap form-wrap-icon">
@@ -116,9 +116,10 @@
                   autocomplete="off"
                   placeholder="Search..."
                   :value="$router.history.current.query.s"
-                  @input="inputSearchKey($event)"
                 >
-                <img src="~/assets/logos/icon-search.svg" alt="">
+                <button class="search-button">
+                  <img src="~/assets/logos/icon-search.svg" alt="">
+                </button>
               </div>
             </form>
           </div>
@@ -135,6 +136,35 @@
           </div>
         </div>
       </section>
+      <section class="pagination">
+        <ul v-if="$store.state.localStorage.listings.totalPages >= 1">
+          <li>
+            <nuxt-link :to="$route.params.number > 1 ? '/listing/page/' + (parseInt($route.params.number) - 1) : '#'">
+              <img src="~/assets/logos/icon-chevrons-left.svg" alt="">
+            </nuxt-link>
+          </li>
+          <li v-for="number in 2" :key="number">
+            <nuxt-link v-if="(parseInt($route.params.number) + number - 2) != $store.state.localStorage.listings.totalPages && (parseInt($route.params.number) + number - 2) != 0" :class="(parseInt($route.params.number) + number - 2) == parseInt($route.params.number) && 'disabled'" :to="(parseInt($route.params.number) + number - 2) != parseInt($route.params.number) ? '/listing/page/' + (parseInt($route.params.number) + number - 2) : '#'">
+              {{ parseInt($route.params.number) + number - 2 }}
+            </nuxt-link>
+          </li>
+          <li v-if="$store.state.localStorage.listings.totalPages > 3">
+            <nuxt-link :to="'#'">
+              ...
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link :class="$route.params.number == $store.state.localStorage.listings.totalPages && 'disabled'" :to="$route.params.number != $store.state.localStorage.listings.totalPages ? '/listing/page/' + $store.state.localStorage.listings.totalPages : '#'">
+              {{ $store.state.localStorage.listings.totalPages }}
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link :to="$route.params.number < $store.state.localStorage.listings.totalPages ? '/listing/page/' + (parseInt($route.params.number) + 1) : '#'">
+              <img src="~/assets/logos/icon-chevrons-right.svg" alt="">
+            </nuxt-link>
+          </li>
+        </ul>
+      </section>
       <!-- Page Footer-->
       <Footer />
     </div>
@@ -150,8 +180,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      loading: true,
-      searchKey: ''
+      loading: true
     }
   },
   computed: {
@@ -172,16 +201,13 @@ export default {
       this.loading = true
 
       try {
-        await listings.get(this, this.$router.history.current.query.s)
+        await listings.get(this)
       } catch (error) {
         console.log('error - ', error)
       }
 
       this.loading = false
       this.$nuxt.$loading.finish()
-    },
-    inputSearchKey (e) {
-      this.searchKey = e.target.value
     }
   }
 }

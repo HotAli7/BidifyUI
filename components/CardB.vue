@@ -7,33 +7,28 @@
           alt=""
         >
       </div>
-      <div class="nft-meta">
-        <span>
-          Fluf World
-        </span>
-        <span>
-          <img
-            src="~/assets/icons/auction-hammer.svg"
-            alt=""
-          >
-          {{ hours }} hrs left
-        </span>
-      </div>
-      <div class="auction-meta border-bottom pt-3">
+      <div class="auction-meta pt-2">
         <h5 class="auction-title">
           {{ item.label }}
         </h5>
-        <span>
-          <img
-            src="~/assets/icons/ethereum-icon.svg"
-            alt=""
-          >
-          {{ item.nextBid }} ETH
-        </span>
       </div>
-      <div class="auction-balance pt-3">
-        <p><span>Top Bidding Price:</span><span>0</span></p>
-        <p><span>Last Bidding Price:</span><span>0</span></p>
+      <div class="auction-balance pb-3">
+        <span>Price:</span>
+        <span class="auction-price">{{ item.nextBid }} ETH</span>
+      </div>
+      <div class="auction-limit border-bottom pb-3">
+        <div class="auction-limit-time">
+          <span>{{ days }}</span>
+          <span>{{ hours }}</span>
+          <span>{{ minutes }}</span>
+          <span>{{ seconds }}</span>
+        </div>
+        <div class="auction-limit-label">
+          <span>Days</span>
+          <span>Hours</span>
+          <span>Minutes</span>
+          <span>Seconds</span>
+        </div>
       </div>
       <div class="auction-action mt-3">
         <button type="button" class="btn btn-block bidify-button bid-button">
@@ -48,7 +43,7 @@
 import RealtimeCountdown from 'realtime-countdown'
 
 export default {
-  name: 'Card',
+  name: 'CardB',
   props: {
     item: Object,
     type: String
