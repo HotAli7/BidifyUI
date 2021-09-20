@@ -528,13 +528,17 @@ section.error
     bottom 50px
 
 .page-loader
+  position fixed
   display flex
   flex-direction column
   justify-content center
   align-items center
   width 100vw
   height 100vh
+  top 0
+  left 0
   background #26213D
+  z-index 9999
   .page-loader-body
     .preloader-wrapper
       display flex
