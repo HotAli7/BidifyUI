@@ -126,7 +126,7 @@ function unatomic(value, decimals) {
 
 // Get the decimals of an ERC20
 async function getDecimals(currency) {
-  if (!currency) {
+  if (!currency || '0x0000000000000000000000000000000000000000') {
     return 18
   }
 

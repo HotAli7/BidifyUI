@@ -172,7 +172,7 @@ contract Bidify is ReentrancyGuard, Ownable, IERC165 {
     return ((listing.price + (listing.price / 20)) / round) * round;
   }
 
-  function bid(uint64 id, address marketplace) external payable nonReentrant {
+  function bid(uint64 id, address marketplace, uint256 amount) external payable nonReentrant {
     // Make sure the auction exists
     // Only works because list and bid have a shared reentrancy guard
     require(id < _nextListing, "listing doesn't exist");
@@ -185,10 +185,11 @@ contract Bidify is ReentrancyGuard, Ownable, IERC165 {
     }
 
     uint256 nextBid = getNextBid(id);
+    require(nextBid < amount, "Bid amount should be more than Next bid amount");
     // This loses control of execution, yet no variables are set yet
     // This means no interim state will be represented if asked
     // Combined with the re-entrancy guard, this is secure
-    universalSingularTransferFrom(listing.currency, nextBid);
+    universalSingularTransferFrom(listing.currency, amount);
 
     // We could grab price below, and then set, yet the lost contract execution is risky
     // Despite the lack of re-entrancy, the metadata would be wrong, if asked for
@@ -196,7 +197,7 @@ contract Bidify is ReentrancyGuard, Ownable, IERC165 {
     address oldBidder = listing.highBidder;
 
     // Note the new highest bidder
-    listing.price = nextBid;
+    listing.price = amount;
     listing.highBidder = msg.sender;
     listing.marketplace = marketplace;
     emit Bid(id, msg.sender, listing.price);

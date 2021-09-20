@@ -258,11 +258,11 @@ export async function list ({ $store, params }) {
   $store.commit('bidify/listing', true)
   $store.commit('bidify/signing', false)
 
-  const result = await bidify.list(params)
+  // const result = await bidify.list(params)
 
   $store.commit('bidify/listing', false)
 
-  return result
+  // return result
 }
 
 /**
