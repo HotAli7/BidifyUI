@@ -1,154 +1,164 @@
 <template>
-  <div v-if="auction" class="page">
-    <Nav />
-    <section class="auction-container">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-5">
-            <div class="auction-image">
-              <img
-                :src="auction.image_preview_url"
-                alt=""
-              >
+  <div>
+    <div v-if="loading" class="page-loader">
+      <div class="page-loader-body">
+        <div class="preloader-wrapper big active">
+          <img src="~/assets/icons/icon-loading.svg" alt="Loading ...">
+          <span>Your page is loading ...</span>
+        </div>
+      </div>
+    </div>
+    <div v-if="auction" class="page">
+      <Nav />
+      <section class="auction-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="auction-image">
+                <img
+                  :src="auction.image_preview_url"
+                  alt=""
+                >
+              </div>
             </div>
-          </div>
-          <div class="col-md-7">
-            <div class="auction-content">
-              <div class="auction-meta">
-                <h3 class="collection-name">
-                  {{ auction.collection.name }}
-                </h3>
-                <div class="social-share-links">
-                  <ul>
-                    <li>
-                      <a href="#">
-                        <img src="~/assets/icons/icon-material.svg" alt="">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="~/assets/icons/icon-discord.svg" alt="">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="~/assets/icons/icon-facebook.svg" alt="">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="~/assets/icons/icon-instagram.svg" alt="">
-                      </a>
-                    </li>
-                    <li class="blank-back">
-                      <a href="#">
-                        <img src="~/assets/icons/icon-feather.svg" alt="">
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <h3 class="auction-name">
-                {{ auction.name }}
-              </h3>
-              <h5 class="auction-status">
-                Auction {{ time }}
-              </h5>
-              <div class="auction-limit">
-                <div class="auction-limit-time">
-                  <span>{{ days }}</span>
-                  <span>{{ hours }}</span>
-                  <span>{{ minutes }}</span>
-                  <span>{{ seconds }}</span>
-                </div>
-                <div class="auction-limit-label">
-                  <span>Days</span>
-                  <span>Hours</span>
-                  <span>Minutes</span>
-                  <span>Seconds</span>
-                </div>
-              </div>
-              <div class="next-bid-amount">
-                <label for="test">Next Bidding Price:</label>
-                <b>{{ auction.nextBid }} ETH</b>
-              </div>
-              <div class="bid-action">
-                <span v-if="highBidder && !auction.paidOut" class="disabled">
-                  You are the Highest Bidder
-                </span>
-                <span v-else-if="insufficientFunds && !auction.paidOut" class="disabled">
-                  Insufficient Funds
-                </span>
-                <div v-else-if="!auction.paidOut && time !== 'Closed'" class="bid-box">
-                  <div class="bid-amount">
-                    <input v-model="bidAmount" type="text" class="bid-amount-input" placeholder="Enter amount of bid...">
+            <div class="col-md-7">
+              <div class="auction-content">
+                <div class="auction-meta">
+                  <h3 class="collection-name">
+                    {{ auction.collection.name }}
+                  </h3>
+                  <div class="social-share-links">
+                    <ul>
+                      <li>
+                        <a href="#">
+                          <img src="~/assets/icons/icon-material.svg" alt="">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <img src="~/assets/icons/icon-discord.svg" alt="">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <img src="~/assets/icons/icon-facebook.svg" alt="">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <img src="~/assets/icons/icon-instagram.svg" alt="">
+                        </a>
+                      </li>
+                      <li class="blank-back">
+                        <a href="#">
+                          <img src="~/assets/icons/icon-feather.svg" alt="">
+                        </a>
+                      </li>
+                    </ul>
                   </div>
-                  <button type="button" class="btn bidify-button bid-button" @click="startBid()">
-                    place a bid
-                  </button>
                 </div>
-                <button v-if="!auction.paidOut && time === 'Closed'" class="btn bidify-button finish-button" @click="finishBid()">
-                  Finish
-                </button>
-                <span v-if="auction.paidOut">
-                  Finished
-                </span>
+                <h3 class="auction-name">
+                  {{ auction.name }}
+                </h3>
+                <h5 class="auction-status">
+                  Auction {{ time }}
+                </h5>
+                <div class="auction-limit">
+                  <div class="auction-limit-time">
+                    <span>{{ days }}</span>
+                    <span>{{ hours }}</span>
+                    <span>{{ minutes }}</span>
+                    <span>{{ seconds }}</span>
+                  </div>
+                  <div class="auction-limit-label">
+                    <span>Days</span>
+                    <span>Hours</span>
+                    <span>Minutes</span>
+                    <span>Seconds</span>
+                  </div>
+                </div>
+                <div class="next-bid-amount">
+                  <label for="test">Next Bidding Price:</label>
+                  <b>{{ auction.nextBid }} ETH</b>
+                </div>
+                <div class="bid-action">
+                  <span v-if="highBidder && !auction.paidOut" class="disabled">
+                    You are the Highest Bidder
+                  </span>
+                  <span v-else-if="insufficientFunds && !auction.paidOut" class="disabled">
+                    Insufficient Funds
+                  </span>
+                  <div v-else-if="!auction.paidOut && time !== 'Closed'" class="bid-box">
+                    <div class="bid-amount">
+                      <input v-model="bidAmount" type="text" class="bid-amount-input" placeholder="Enter amount of bid...">
+                    </div>
+                    <button type="button" class="btn bidify-button bid-button" @click="startBid()">
+                      place a bid
+                    </button>
+                  </div>
+                  <button v-if="!auction.paidOut && time === 'Closed'" class="btn bidify-button finish-button" @click="finishBid()">
+                    Finish
+                  </button>
+                  <span v-if="auction.paidOut">
+                    Finished
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="auction-description">
+                <h4 class="description-title">
+                  Description
+                </h4>
+                <p>{{ auction.description }}</p>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="auction-details">
+                <h4 class="details-title">
+                  Details
+                </h4>
+                <p><span>Created</span><span>{{ auction.asset_contract.created_date }}</span></p>
+                <p><span>Downloadable File</span><span>Yes</span></p>
+                <p><span>Edition</span><span>DD Month YYYY</span></p>
+                <p><span>Contract Address</span><span>{{ auction.address.substr(0, 7) + "..." + auction.address.substr(auction.address.length - 4, 4) }}</span></p>
+                <p><span>Token ID</span><span>{{ auction.token_id }}</span></p>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-5">
-            <div class="auction-description">
-              <h4 class="description-title">
-                Description
-              </h4>
-              <p>{{ auction.description }}</p>
+      </section>
+      <section class="bidify-section bid-offers">
+        <div class="container">
+          <div class="bidify-data-section">
+            <div class="section-header">
+              <h5 class="section-title">
+                Bid Offers
+              </h5>
+              <span class="collapse">O</span>
             </div>
-          </div>
-          <div class="col-md-7">
-            <div class="auction-details">
-              <h4 class="details-title">
-                Details
-              </h4>
-              <p><span>Created</span><span>{{ auction.asset_contract.created_date }}</span></p>
-              <p><span>Downloadable File</span><span>Yes</span></p>
-              <p><span>Edition</span><span>DD Month YYYY</span></p>
-              <p><span>Contract Address</span><span>{{ auction.address.substr(0, 7) + "..." + auction.address.substr(auction.address.length - 4, 4) }}</span></p>
-              <p><span>Token ID</span><span>{{ auction.token_id }}</span></p>
+            <div class="section-container">
+              <table class="bidify-table">
+                <thead>
+                  <tr>
+                    <th>Listed by:</th>
+                    <th>Price:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(bid, index) in auction.bids" :key="index">
+                    <td>{{ bid.bidder }}</td>
+                    <td>{{ bid.price }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="bidify-section bid-offers">
-      <div class="container">
-        <div class="bidify-data-section">
-          <div class="section-header">
-            <h5 class="section-title">
-              Bid Offers
-            </h5>
-            <span class="collapse">O</span>
-          </div>
-          <div class="section-container">
-            <table class="bidify-table">
-              <thead>
-                <tr>
-                  <th>Listed by:</th>
-                  <th>Price:</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(bid, index) in auction.bids" :key="index">
-                  <td>{{ bid.bidder }}</td>
-                  <td>{{ bid.price }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -175,7 +185,8 @@ export default {
       hours: 0,
       minutes: 0,
       seconds: 0,
-      bidAmount: 0
+      bidAmount: 0,
+      loading: false
     }
   },
   computed: {
@@ -250,11 +261,13 @@ export default {
       const listings = require('~/plugins/listings.js')
 
       this.$nuxt.$loading.start()
+      this.loading = true
 
       await listings.getOne(this)
 
       this.auction = this.$store.state.localStorage.listings.active
-      console.log(this.auction)
+
+      this.loading = false
       this.$nuxt.$loading.finish()
     },
     setTimeLeft (t) {
@@ -283,6 +296,7 @@ export default {
         return false
       }
 
+      this.loading = true
       const listings = require('~/plugins/listings.js')
 
       const payload = {
@@ -296,6 +310,7 @@ export default {
         console.log(error)
       }
 
+      this.loading = false
       await this.refetchListing()
     },
     async finishBid () {

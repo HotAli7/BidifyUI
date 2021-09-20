@@ -67,25 +67,10 @@ export default {
   },
   methods: {
     setTimeLeft (t) {
-      if (t.days === '0') {
-        this.time = `${t.hours}h ${t.minutes}m ${t.seconds}s`
-        return
-      }
-
-      if (t.hours === '0') {
-        this.time = `${t.minutes}m ${t.seconds}s`
-        return
-      }
-
-      if (t.minutes === '0') {
-        this.time = `${t.seconds}s`
-        return
-      }
       this.days = t.days
       this.hours = t.hours
       this.minutes = t.minutes
       this.seconds = t.seconds
-      this.time = `${t.days}d ${t.hours}h ${t.minutes}m ${t.seconds}s`
     },
     timeLeft () {
       const timeStamp = this.item.endTime * 1000

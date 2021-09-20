@@ -18,16 +18,22 @@
       </div>
       <div class="auction-limit border-bottom pb-3">
         <div class="auction-limit-time">
-          <span>{{ days }}</span>
-          <span>{{ hours }}</span>
-          <span>{{ minutes }}</span>
-          <span>{{ seconds }}</span>
-        </div>
-        <div class="auction-limit-label">
-          <span>Days</span>
-          <span>Hours</span>
-          <span>Minutes</span>
-          <span>Seconds</span>
+          <div class="time-item">
+            <span>{{ days }}</span>
+            <span class="auction-limit-label">Days</span>
+          </div>
+          <div class="time-item">
+            <span>{{ hours }}</span>
+            <span class="auction-limit-label">Hours</span>
+          </div>
+          <div class="time-item">
+            <span>{{ minutes }}</span>
+            <span class="auction-limit-label">Minutes</span>
+          </div>
+          <div class="time-item">
+            <span>{{ seconds }}</span>
+            <span class="auction-limit-label">Seconds</span>
+          </div>
         </div>
       </div>
       <div class="auction-action mt-3">
@@ -62,25 +68,10 @@ export default {
   },
   methods: {
     setTimeLeft (t) {
-      if (t.days === '0') {
-        this.time = `${t.hours}h ${t.minutes}m ${t.seconds}s`
-        return
-      }
-
-      if (t.hours === '0') {
-        this.time = `${t.minutes}m ${t.seconds}s`
-        return
-      }
-
-      if (t.minutes === '0') {
-        this.time = `${t.seconds}s`
-        return
-      }
       this.days = t.days
       this.hours = t.hours
       this.minutes = t.minutes
       this.seconds = t.seconds
-      this.time = `${t.days}d ${t.hours}h ${t.minutes}m ${t.seconds}s`
     },
     timeLeft () {
       const timeStamp = this.item.endTime * 1000
