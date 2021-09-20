@@ -30,10 +30,26 @@
         <div class="offset-md-6 col-md-3">
           <div class="footer-social">
             <ul>
-              <li><a href="#">D</a></li>
-              <li><a href="#">F</a></li>
-              <li><a href="#">I</a></li>
-              <li><a href="#">T</a></li>
+              <li>
+                <a href="#">
+                  <img src="~/assets/icons/icon-facebook.svg" alt="">
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="~/assets/icons/icon-instagram.svg" alt="">
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="~/assets/icons/icon-twitter.svg" alt="">
+                </a>
+              </li>
+              <li class="blank-back">
+                <a href="#">
+                  <img src="~/assets/icons/icon-linkedin.svg" alt="">
+                </a>
+              </li>
             </ul>
           </div>
         </div>

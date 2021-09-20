@@ -250,13 +250,26 @@ footer.footer
     ul
       height 100%
       display flex
-      justify-content space-around
+      justify-content center
       align-items center
       li
+        display flex
+        justify-content center
+        align-items center
+        width 34px
+        height 34px
+        margin 10px
+        background #5B605F
+        border 1px solid #70707000
+        border-radius 8px
         a
-          font-size 1.5rem
-          color white
-          text-decoration none
+          display block
+          img
+            width 20px
+            height 20px
+        &.blank-back
+          background #00000000
+          border 1px solid #707070
 
 .listing-logo
   display flex
@@ -498,3 +511,37 @@ footer.footer
         text-decoration none
         &.disabled
           background #F79420
+
+section.error
+  position absolute
+  display flex
+  justify-content center
+  width 100vw
+  height 100vh
+  top 0
+  left 0
+  background url(../images/error-back.png)
+  background-size cover
+  background-repeat no-repeat
+  .error-button
+    position absolute
+    bottom 50px
+
+.page-loader
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  width 100vw
+  height 100vh
+  background #26213D
+  .page-loader-body
+    .preloader-wrapper
+      display flex
+      flex-direction column
+      justify-content center
+      align-items center
+      span
+        margin-top 30px
+        font-size 1.5rem
+        color white

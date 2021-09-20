@@ -22,27 +22,27 @@
                   <ul>
                     <li>
                       <a href="#">
-                        <img src="~/assets/logos/icon-material.svg" alt="">
+                        <img src="~/assets/icons/icon-material.svg" alt="">
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="~/assets/logos/icon-discord.svg" alt="">
+                        <img src="~/assets/icons/icon-discord.svg" alt="">
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="~/assets/logos/icon-facebook.svg" alt="">
+                        <img src="~/assets/icons/icon-facebook.svg" alt="">
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="~/assets/logos/icon-instagram.svg" alt="">
+                        <img src="~/assets/icons/icon-instagram.svg" alt="">
                       </a>
                     </li>
                     <li class="blank-back">
                       <a href="#">
-                        <img src="~/assets/logos/icon-feather.svg" alt="">
+                        <img src="~/assets/icons/icon-feather.svg" alt="">
                       </a>
                     </li>
                   </ul>
@@ -278,6 +278,11 @@ export default {
       return new RealtimeCountdown({ timeStamp, onCountInitialized, onCount, onCountEnd })
     },
     async startBid () {
+      if (this.bidAmount < this.auction.nextBid) {
+        alert('Bid amount should be more than next bid amount!')
+        return false
+      }
+
       const listings = require('~/plugins/listings.js')
 
       const payload = {

@@ -31,28 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-  .el-form-item__label
-    line-height 18px
-
-  .btn-close
-    position absolute
-    top $space-s
-    right $space-s
-
-  .btn-action
-    width 100%
-
-  .el-dialog
-    padding $space-m
-    max-width 90%
-
-  .el-dialog__header
-    padding $space-m
-
-  .el-dialog__body
-    padding 0 $space-m $space-m $space-m
-    font-size $size-m
-
-</style>

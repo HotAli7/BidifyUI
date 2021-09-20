@@ -4,50 +4,8 @@
     <div v-if="loading" class="page-loader">
       <div class="page-loader-body">
         <div class="preloader-wrapper big active">
-          <div class="spinner-layer spinner-blue">
-            <div class="circle-clipper left">
-              <div class="circle" />
-            </div>
-            <div class="gap-patch">
-              <div class="circle" />
-            </div>
-            <div class="circle-clipper right">
-              <div class="circle" />
-            </div>
-          </div>
-          <div class="spinner-layer spinner-red">
-            <div class="circle-clipper left">
-              <div class="circle" />
-            </div>
-            <div class="gap-patch">
-              <div class="circle" />
-            </div>
-            <div class="circle-clipper right">
-              <div class="circle" />
-            </div>
-          </div>
-          <div class="spinner-layer spinner-yellow">
-            <div class="circle-clipper left">
-              <div class="circle" />
-            </div>
-            <div class="gap-patch">
-              <div class="circle" />
-            </div>
-            <div class="circle-clipper right">
-              <div class="circle" />
-            </div>
-          </div>
-          <div class="spinner-layer spinner-green">
-            <div class="circle-clipper left">
-              <div class="circle" />
-            </div>
-            <div class="gap-patch">
-              <div class="circle" />
-            </div>
-            <div class="circle-clipper right">
-              <div class="circle" />
-            </div>
-          </div>
+          <img src="~/assets/icons/icon-loading.svg" alt="Loading ...">
+          <span>Your page is loading ...</span>
         </div>
       </div>
     </div>
@@ -75,27 +33,27 @@
           <ul>
             <li>
               <a href="#">
-                <img src="~/assets/logos/icon-material.svg" alt="">
+                <img src="~/assets/icons/icon-material.svg" alt="">
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="~/assets/logos/icon-discord.svg" alt="">
+                <img src="~/assets/icons/icon-discord.svg" alt="">
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="~/assets/logos/icon-facebook.svg" alt="">
+                <img src="~/assets/icons/icon-facebook.svg" alt="">
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="~/assets/logos/icon-instagram.svg" alt="">
+                <img src="~/assets/icons/icon-instagram.svg" alt="">
               </a>
             </li>
             <li class="blank-back">
               <a href="#">
-                <img src="~/assets/logos/icon-feather.svg" alt="">
+                <img src="~/assets/icons/icon-feather.svg" alt="">
               </a>
             </li>
           </ul>
@@ -118,7 +76,7 @@
                   :value="$router.history.current.query.s"
                 >
                 <button class="search-button">
-                  <img src="~/assets/logos/icon-search.svg" alt="">
+                  <img src="~/assets/icons/icon-search.svg" alt="">
                 </button>
               </div>
             </form>

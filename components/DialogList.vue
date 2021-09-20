@@ -3,9 +3,8 @@
     :visible.sync="showModal"
     title="Start an Auction"
     label-width="0px"
-    width="400px"
   >
-    <el-button class="btn-close is-themed" type="default" circle @click="cancel()">
+    <el-button class="btn-close" type="default" circle @click="cancel()">
       <i class="el-icon-close icon" />
     </el-button>
 
@@ -26,23 +25,25 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="Price">
-        <el-input-number
-          v-model="price"
-          :precision="3"
-          :step="0.01"
-          :min="0.001"
-          :max="100"
-          @change="priceChanged"
-        />
-      </el-form-item>
-      <el-form-item label="Days">
-        <el-input-number v-model="days" :min="1" :max="10" @change="daysChanged" />
-      </el-form-item>
+      <div class="el-flex-box">
+        <el-form-item label="Price">
+          <el-input-number
+            v-model="price"
+            :precision="3"
+            :step="0.01"
+            :min="0.001"
+            :max="100"
+            @change="priceChanged"
+          />
+        </el-form-item>
+        <el-form-item label="Days">
+          <el-input-number v-model="days" :min="1" :max="10" @change="daysChanged" />
+        </el-form-item>
+      </div>
     </el-form>
 
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" :loading="waiting || waitingStore" class="btn-action is-themed" size="default" @click="list()">Start Auction</el-button>
+      <el-button type="primary" :loading="waiting || waitingStore" class="btn-action" size="default" @click="list()">Start Auction</el-button>
     </span>
   </el-dialog>
 </template>
@@ -137,15 +138,40 @@ export default {
 </script>
 
 <style lang="stylus">
+  .el-dialog
+    padding 30px
+    max-width 570px
+    background #26223D
+    .el-dialog__title
+      color white
+
+  .el-flex-box
+    display flex
+    justify-content space-around
+    .el-form-item
+      width 48%
+      .el-input-number
+        width 100%
+
   .el-form-item__label
     line-height 18px
-
+    color white
+  .el-dialog__headerbtn
+    display none
   .btn-close
     position absolute
     top $space-s
     right $space-s
+    background transparent
+    color white
+    opacity 1
 
   .btn-action
     width 100%
+    padding 10px 45px !important
+    background linear-gradient(90deg, #FFBF23, #F78620)
+    color white !important
+    text-transform uppercase
+    font-size 1.25rem !important
 
 </style>
