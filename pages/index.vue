@@ -139,7 +139,7 @@ export default {
     liveAuction () {
       const currentTime = new Date().getTime()
       const liveAuctions = this.$store.state.localStorage.listings.list.filter((auction, i) => {
-        return (auction.endTime > currentTime)
+        return (auction.endTime * 1000 > currentTime)
       })
       return liveAuctions.length < 5 ? liveAuctions : liveAuctions.slice(liveAuctions.length - 4, liveAuctions.length)
     },

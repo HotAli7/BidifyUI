@@ -310,12 +310,13 @@ export default {
         console.log(error)
       }
 
-      this.loading = false
       await this.refetchListing()
+      this.loading = false
     },
     async finishBid () {
       const listings = require('~/plugins/listings.js')
 
+      this.loading = true
       const payload = {
         $store: this.$store,
         id: this.auction.listing_id
@@ -324,6 +325,7 @@ export default {
       await listings.finishBid(payload)
 
       await this.refetchListing()
+      this.loading = false
     },
     cancelBid () {
       this.$store.commit('bidify/error', false)
