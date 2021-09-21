@@ -11,7 +11,7 @@
         <div class="navbar-nav-wrap">
           <!-- RD Navbar Brand-->
           <!-- RD Navbar Nav-->
-          <ul class="navbar-nav">
+          <ul class="navbar-nav desktop-nav">
             <li :class="$router.history.current.path == '/'?'active':''">
               <NuxtLink to="/">
                 Home
@@ -68,6 +68,54 @@
               </el-button>
             </li>
           </ul>
+          <el-dropdown trigger="click" class="mobile-nav" @command="handleCommand">
+            <el-button type="default" class="is-themed" :circle="true">
+              <i class="el-icon-menu" />
+            </el-button>
+            <el-dropdown-menu slot="dropdown" style="width: 280px;">
+              <ul class="navbar-nav">
+                <li :class="$router.history.current.path == '/'?'active':''">
+                  <NuxtLink to="/">
+                    Home
+                  </NuxtLink>
+                </li>
+                <li :class="$router.history.current.path == '/about'?'active':''">
+                  <a href="https://bidify.org/" target="_blank">
+                    About Us
+                  </a>
+                </li>
+                <li :class="$router.history.current.path.includes('/listing/page')?'active':''">
+                  <NuxtLink to="/listing/page/1">
+                    Explore
+                  </NuxtLink>
+                </li>
+                <li :class="$router.history.current.path == '/owned'?'active':''">
+                  <NuxtLink to="/owned">
+                    My Auctions
+                  </NuxtLink>
+                </li>
+              </ul>
+              <div class="balance">
+                <div class="simple-list">
+                  <h5>
+                    Wallet
+
+                    <span class="truncate">
+                      {{ address }}
+                    </span>
+                  </h5>
+
+                  <div class="simple-list-item">
+                    <div class="label">
+                      <small>Balance</small>
+
+                      <span>{{ balances.ether }} ETH</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </nav>
     </div>

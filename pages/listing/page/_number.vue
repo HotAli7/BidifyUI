@@ -101,11 +101,13 @@
               <img src="~/assets/icons/icon-chevrons-left.svg" alt="">
             </nuxt-link>
           </li>
-          <li v-for="number in 2" :key="number">
-            <nuxt-link v-if="(parseInt($route.params.number) + number - 2) != $store.state.localStorage.listings.totalPages && (parseInt($route.params.number) + number - 2) != 0" :class="(parseInt($route.params.number) + number - 2) == parseInt($route.params.number) && 'disabled'" :to="(parseInt($route.params.number) + number - 2) != parseInt($route.params.number) ? '/listing/page/' + (parseInt($route.params.number) + number - 2) : '#'">
-              {{ parseInt($route.params.number) + number - 2 }}
-            </nuxt-link>
-          </li>
+          <div v-for="number in 2" :key="number">
+            <li v-if="(parseInt($route.params.number) + number - 2) != $store.state.localStorage.listings.totalPages && (parseInt($route.params.number) + number - 2) != 0">
+              <nuxt-link v-if="(parseInt($route.params.number) + number - 2) != $store.state.localStorage.listings.totalPages && (parseInt($route.params.number) + number - 2) != 0" :class="(parseInt($route.params.number) + number - 2) == parseInt($route.params.number) && 'disabled'" :to="(parseInt($route.params.number) + number - 2) != parseInt($route.params.number) ? '/listing/page/' + (parseInt($route.params.number) + number - 2) : '#'">
+                {{ parseInt($route.params.number) + number - 2 }}
+              </nuxt-link>
+            </li>
+          </div>
           <li v-if="$store.state.localStorage.listings.totalPages > 3">
             <nuxt-link :to="'#'">
               ...

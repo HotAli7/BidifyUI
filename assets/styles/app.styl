@@ -97,6 +97,8 @@ header.header
   .logo
     display flex
     justify-content center
+    img
+      width 100%
 .section.hero.listing
   height 50vh
   background url(../images/listing-back.png)
@@ -112,6 +114,11 @@ header.header
     color white
   p.section-description
     color white
+
+  .about-image
+    width 100%
+    img
+      width 100%
 
 
 .section.most-popular
@@ -291,6 +298,7 @@ footer.footer
     align-items center
     ul
       display flex
+      padding-left 0
       li
         display flex
         justify-content center
@@ -445,6 +453,7 @@ footer.footer
         width 100%
   .auction-description
     padding 30px
+    margin-bottom 25px
     background #26213D
     border-radius 12px
     color white
@@ -483,7 +492,9 @@ footer.footer
     font-size 1.25rem
     color white
     table
-      width 100%
+      display: inline-block;
+      width: 100%;
+      overflow: auto;
       thead
         border-bottom 1px solid #707070
         th
@@ -550,3 +561,75 @@ section.error
         margin-top 30px
         font-size 1.5rem
         color white
+.mobile-nav
+  display none !important
+
+footer.footer .footer-logo
+  width 100%
+  img
+    width 100%
+@media (max-width: 991px)
+  header.header
+    position relative
+
+    .desktop-nav
+      display none !important
+    .mobile-nav
+      display inline-block !important
+  
+  .navbar-nav
+    margin 15px
+    li
+      padding 5px
+      a
+        color #333333
+        text-decoration none
+      &.active
+        a
+          color #F79420
+  .balance
+    padding 5px
+    padding-top 25px !important
+    border-top 1px solid #333333
+    .label
+      small
+        color #333333
+
+  .hero-image
+    display none !important
+  footer.footer .footer-menu ul
+    flex-direction column
+    align-items flex-start
+
+  .section.filter-section .social-links ul li
+    width 32px
+    height 32px
+    img
+      width 14px
+      height 14px
+  .section.filter-section .search-box .search-form .form-wrap .search-form-input
+    width 200px
+  .pagination ul li a
+    width 24px
+    height 24px
+    font-size 1rem
+    border-radius 4px
+    img
+      width 12px
+      height 12px
+  .auction-container .auction-content .auction-meta
+    flex-direction column
+  .auction-container .auction-content .auction-meta .social-share-links ul li
+    width 32px
+    height 32px
+    img
+      width 14px
+      height 14px
+
+  .auction-container .auction-content .auction-limit .auction-limit-time span
+    font-size 1.5rem
+  .auction-container .auction-content .auction-limit .auction-limit-label span
+    font-size 1.15rem
+
+  .bidify-button
+    font-size 1.15rem !important

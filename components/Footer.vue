@@ -45,7 +45,7 @@
                   <img src="~/assets/icons/icon-twitter.svg" alt="">
                 </a>
               </li>
-              <li class="blank-back">
+              <li>
                 <a href="#">
                   <img src="~/assets/icons/icon-linkedin.svg" alt="">
                 </a>
