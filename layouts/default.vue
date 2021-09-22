@@ -6,6 +6,10 @@
 
     <DialogList />
 
+    <DialogAuction />
+
+    <DialogSuccess />
+
     <client-only>
       <CheckConnection />
     </client-only>

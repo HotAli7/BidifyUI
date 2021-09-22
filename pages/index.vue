@@ -18,7 +18,7 @@
             <div class="col-md-7">
               <div class="hero-content">
                 <h1>The Best Place to Bid, Buy and Sell Valued <span>NFTs</span></h1>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
+                <p>Welcome to this purpose built Fluf NFT auction site, powered by the Bidify auction</p>
               </div>
             </div>
             <div class="col-md-5">
@@ -41,7 +41,8 @@
             Live Auctions
           </h3>
           <p class="section-description fixed-width">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+            These live auctions are available to bid on now. <br />
+            The length will be extended by 5 minutes if you bid in the last 5 minutes.
           </p>
           <div class="live-auctions auction-list">
             <div class="row">
@@ -60,10 +61,7 @@
                 About
               </h3>
               <p class="section-description">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
-              </p>
-              <p class="section-description">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                Bidify is the premier tool for auction listing and selling on the Ethereum network, This fluf specific site allows you to browse all Fluf NFTs currently being sold and a portion of the fees from any NFT sold or listed here goes directly into FLUF. See <a href="https://rinkeby.etherscan.io/address/0x138c81d54cbd016d524757d26bfdbf4addb8f808#code">here</a> for transparency
               </p>
             </div>
             <div class="col-md-6">
@@ -76,12 +74,12 @@
       </section>
       <section class="section most-popular">
         <div class="container">
-          <span class="section-sub-title">Top Collections</span>
+          <span class="section-sub-title">Top FLUFS</span>
           <h3 class="section-title">
             Most Popular
           </h3>
           <p class="section-description fixed-width">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+            Here are some of the highest selling recent auctions, feel free to place a bid. Good luck!
           </p>
           <div class="popular-auctions auction-list">
             <div class="row">

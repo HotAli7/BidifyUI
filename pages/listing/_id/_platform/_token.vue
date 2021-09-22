@@ -30,28 +30,18 @@
                   <div class="social-share-links">
                     <ul>
                       <li>
-                        <a href="#">
-                          <img src="~/assets/icons/icon-material.svg" alt="">
+                        <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/${$router.history.current.path}&text=`">
+                          <img src="~/assets/icons/icon-twitter.svg" alt="">
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <img src="~/assets/icons/icon-discord.svg" alt="">
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
+                        <a :href="`https://www.facebook.com/sharer/sharer.php?u=http://176.223.141.40/${$router.history.current.path}`">
                           <img src="~/assets/icons/icon-facebook.svg" alt="">
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a :href="`https://msng.link/o/?http://176.223.141.40/${$router.history.current.path}=ig`">
                           <img src="~/assets/icons/icon-instagram.svg" alt="">
-                        </a>
-                      </li>
-                      <li class="blank-back">
-                        <a href="#">
-                          <img src="~/assets/icons/icon-feather.svg" alt="">
                         </a>
                       </li>
                     </ul>
@@ -293,7 +283,7 @@ export default {
       return new RealtimeCountdown({ timeStamp, onCountInitialized, onCount, onCountEnd })
     },
     async startBid () {
-      if (this.bidAmount < this.auction.nextBid) {
+      if (this.bidAmount < this.form.nextBid) {
         alert('Bid amount should be more than next bid amount!')
         return false
       }
@@ -303,16 +293,20 @@ export default {
 
       const payload = {
         $store: this.$store,
-        id: this.auction.listing_id,
+        id: this.form.listing_id,
         bidAmount: this.bidAmount
       }
       try {
         await listings.bid(payload)
+        const successPayload = {
+          type: 'bid',
+          auction: this.form
+        }
+
+        this.$store.commit('bidify/successModal', successPayload)
       } catch (error) {
         console.log(error)
       }
-
-      await this.refetchListing()
       this.loading = false
     },
     async finishBid () {
@@ -321,12 +315,20 @@ export default {
       this.loading = true
       const payload = {
         $store: this.$store,
-        id: this.auction.listing_id
+        id: this.form.listing_id
       }
 
-      await listings.finishBid(payload)
+      try {
+        await listings.finishBid(payload)
 
-      await this.refetchListing()
+        const successPayload = {
+          type: 'finish',
+          auction: this.form
+        }
+        this.$store.commit('bidify/successModal', successPayload)
+      } catch (error) {
+        console.log(error)
+      }
       this.loading = false
     },
     cancelBid () {

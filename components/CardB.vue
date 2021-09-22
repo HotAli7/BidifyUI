@@ -37,10 +37,10 @@
         </div>
       </div>
       <div class="auction-action mt-3">
-        <button v-if="time !== 'Ended'" type="button" class="btn btn-block bidify-button bid-button">
+        <button v-if="time !== 'Ended'" type="button" class="btn btn-block bidify-button bid-button" @click="showAuction($event)">
           place a bid
         </button>
-        <span v-else class="btn btn-block ended-button">
+        <span v-else class="btn btn-block ended-button" @click="showAuction($event)">
           {{ time }}
         </span>
       </div>
@@ -70,6 +70,10 @@ export default {
     this.timeLeft()
   },
   methods: {
+    showAuction ($event) {
+      $event.preventDefault()
+      this.$store.commit('bidify/auctionModal', this.item)
+    },
     setTimeLeft (t) {
       this.days = t.days
       this.hours = t.hours

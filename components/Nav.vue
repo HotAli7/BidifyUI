@@ -17,14 +17,19 @@
                 Home
               </NuxtLink>
             </li>
-            <li :class="$router.history.current.path == '/about'?'active':''">
+            <li>
               <a href="https://bidify.org/" target="_blank">
-                About Us
+                About Bidify
+              </a>
+            </li>
+            <li>
+              <a href="https://fluf.world/" target="_blank">
+                About FLUF
               </a>
             </li>
             <li :class="$router.history.current.path.includes('/listing/page')?'active':''">
               <NuxtLink to="/listing/page/1">
-                Explore
+                Auctions
               </NuxtLink>
             </li>
             <li :class="$router.history.current.path == '/owned'?'active':''">

@@ -113,14 +113,23 @@ export default {
         price: this.price.toString(),
         days: this.days.toString()
       }
+      let list
+      try {
+        list = await listings.list({
+          $store: this.$store,
+          params
+        })
 
-      const list = await listings.list({
-        $store: this.$store,
-        params
-      })
+        const successPayload = {
+          type: 'list',
+          auction: listModal
+        }
+        this.$store.commit('bidify/successModal', successPayload)
+      } catch (error) {
+        console.log(error)
+      }
 
       this.cancel()
-
       await listings.getOwnedNFTs(this)
       await listings.getOwnedListings(this)
 

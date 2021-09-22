@@ -31,23 +31,18 @@
           <div class="footer-social">
             <ul>
               <li>
-                <a href="#">
-                  <img src="~/assets/icons/icon-facebook.svg" alt="">
-                </a>
-              </li>
-              <li>
-                <a href="#">
+                <a href="https://www.instagram.com/flufworld/?hl=en">
                   <img src="~/assets/icons/icon-instagram.svg" alt="">
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="https://twitter.com/FLUF_World">
                   <img src="~/assets/icons/icon-twitter.svg" alt="">
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <img src="~/assets/icons/icon-linkedin.svg" alt="">
+                <a href="https://github.com/Bidify">
+                  <img src="~/assets/icons/icon-github.svg" alt="">
                 </a>
               </li>
             </ul>
