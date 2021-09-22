@@ -127,7 +127,7 @@ export default {
   axios: {},
 
   generate: {
-    routes: ['404']
+    routes: ['error']
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
