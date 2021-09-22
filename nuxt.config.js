@@ -91,7 +91,7 @@ export default {
   //   }
   //   // debug: true, // enable to track in dev mode
   // },
-  ssr: false,
+  mode: 'spa',
   styleResources: {
     stylus: [
       './assets/mixins.styl',
