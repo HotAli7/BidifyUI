@@ -30,7 +30,7 @@
                   <div class="social-share-links">
                     <ul>
                       <li>
-                        <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/${$router.history.current.path}&text=`">
+                        <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/${$router.history.current.path}&text=price=${ auction.currentBid }ETH`">
                           <img src="~/assets/icons/icon-twitter.svg" alt="">
                         </a>
                       </li>
@@ -297,13 +297,16 @@ export default {
         bidAmount: this.bidAmount
       }
       try {
-        await listings.bid(payload)
-        const successPayload = {
-          type: 'bid',
-          auction: this.form
-        }
+        const result = await listings.bid(payload)
 
-        this.$store.commit('bidify/successModal', successPayload)
+        if (result) {
+          const successPayload = {
+            type: 'bid',
+            auction: this.form
+          }
+
+          this.$store.commit('bidify/successModal', successPayload)
+        }
       } catch (error) {
         console.log(error)
       }

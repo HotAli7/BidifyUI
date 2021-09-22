@@ -296,8 +296,8 @@ export async function bid ({ $store, id, bidAmount }) {
     $store.commit('bidify/error', err.message)
     return
   }
-
   $store.commit('bidify/bidding', false)
+  return true
 }
 
 /**
