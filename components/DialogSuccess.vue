@@ -41,17 +41,17 @@
               <div class="social-share-links">
                 <ul>
                   <li>
-                    <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }&text=price=${ form.auction.currentBid }ETH`">
+                    <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }&text=I just bid on an NFT, check it out! price=${ form.auction.currentBid }ETH`" target="_blank">
                       <img src="~/assets/icons/icon-twitter.svg" alt="">
                     </a>
                   </li>
                   <li>
-                    <a :href="`https://www.facebook.com/sharer/sharer.php?u=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }`">
+                    <a :href="`https://www.facebook.com/sharer/sharer.php?u=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }`" target="_blank">
                       <img src="~/assets/icons/icon-facebook.svg" alt="">
                     </a>
                   </li>
                   <li>
-                    <a :href="`https://msng.link/o/?http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }=ig`">
+                    <a :href="`https://msng.link/o/?http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }=ig`" target="_blank">
                       <img src="~/assets/icons/icon-instagram.svg" alt="">
                     </a>
                   </li>

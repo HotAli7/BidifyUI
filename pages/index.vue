@@ -143,6 +143,7 @@ export default {
     },
     popularAuction () {
       const popularAuctions = this.$store.state.localStorage.listings.popularList
+      console.log(popularAuctions)
       return popularAuctions.length < 5 ? popularAuctions : popularAuctions.slice(0, 4)
     }
   },

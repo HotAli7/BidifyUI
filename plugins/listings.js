@@ -181,18 +181,37 @@ export async function getOwnedListings ({ $store }) {
   }
 
   // get bidify listings
-  const listings = await bidify.getListings(account)
-
-  // get bidify listing for each
+  const myListings = await bidify.getListings(account)
+  const listings = await bidify.getListings()
   for (const i in listings) {
     listings[i] = await bidify.getListing(i)
   }
 
   // get assets and merge data
-  const assets = await addAssetsToListings(listings)
+  const allAssets = await addAssetsToListings(listings)
+
+  const myBidListings = allAssets.filter((listing) => {
+    if (listing.bids.length) {
+      for (let i = 0; i < listing.bids.length; i++) {
+        if (account.toLowerCase() === listing.bids[i].bidder.toLowerCase() && !myListings.includes(listing.listing_id)) {
+          return true
+        }
+      }
+    }
+    return false
+  })
+
+  // get bidify listing for each
+  for (const i in myListings) {
+    myListings[i] = await bidify.getListing(i)
+  }
+
+  // get assets and merge data
+  const assets = await addAssetsToListings(myListings)
+  const myAssets = assets.concat(myBidListings)
 
   // commit to store
-  $store.commit('localStorage/owned', assets)
+  $store.commit('localStorage/owned', myAssets)
 }
 
 /**

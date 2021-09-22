@@ -30,17 +30,17 @@
                   <div class="social-share-links">
                     <ul>
                       <li>
-                        <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/${$router.history.current.path}&text=price=${ auction.currentBid }ETH`">
+                        <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/${$router.history.current.path}&text=`" target="_blank">
                           <img src="~/assets/icons/icon-twitter.svg" alt="">
                         </a>
                       </li>
                       <li>
-                        <a :href="`https://www.facebook.com/sharer/sharer.php?u=http://176.223.141.40/${$router.history.current.path}`">
+                        <a :href="`https://www.facebook.com/sharer/sharer.php?u=http://176.223.141.40/${$router.history.current.path}`" target="_blank">
                           <img src="~/assets/icons/icon-facebook.svg" alt="">
                         </a>
                       </li>
                       <li>
-                        <a :href="`https://msng.link/o/?http://176.223.141.40/${$router.history.current.path}=ig`">
+                        <a :href="`https://msng.link/o/?http://176.223.141.40/${$router.history.current.path}=ig`" target="_blank">
                           <img src="~/assets/icons/icon-instagram.svg" alt="">
                         </a>
                       </li>
