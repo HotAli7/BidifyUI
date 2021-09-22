@@ -37,9 +37,12 @@
         </div>
       </div>
       <div class="auction-action mt-3">
-        <button type="button" class="btn btn-block bidify-button bid-button">
+        <button v-if="time !== 'Ended'" type="button" class="btn btn-block bidify-button bid-button">
           place a bid
         </button>
+        <span v-else class="btn btn-block ended-button">
+          {{ time }}
+        </span>
       </div>
     </NuxtLink>
   </div>
