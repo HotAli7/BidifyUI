@@ -7,9 +7,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <div class="footer-logo">
+          <NuxtLink to="/" class="footer-logo">
             <img src="~/assets/logos/footer-logo.svg" alt="Footer Logo">
-          </div>
+          </NuxtLink>
         </div>
         <div class="col-md-6">
           <div class="footer-menu">

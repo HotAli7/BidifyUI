@@ -140,25 +140,26 @@ export async function get ({ $store, $route }) {
 
   // get assets and merge data
   const assets = await addAssetsToListings(listings)
+  const list = assets.sort((a, b) => parseInt(b.listing_id) - parseInt(a.listing_id))
 
   if (searchKey) {
-    const filteredListings = assets.filter((list) => {
-      return list.name.toLowerCase().includes(searchKey.toLowerCase())
+    const filteredListings = list.filter((listing) => {
+      return listing.name.toLowerCase().includes(searchKey.toLowerCase())
     })
     const slicedListings = filteredListings.slice((pageNumber - 1) * 8, (pageNumber * 8))
     // commit to store
-    $store.commit('localStorage/totalPages', Math.ceil(filteredListings.length / 8))
-    $store.commit('localStorage/sortListing', slicedListings)
-    $store.commit('localStorage/listing', slicedListings)
+    await $store.commit('localStorage/totalPages', Math.ceil(filteredListings.length / 8))
+    await $store.commit('localStorage/listing', slicedListings)
+    await $store.commit('localStorage/popularListing', slicedListings)
   } else if (pageNumber) {
-    const slicedListings = assets.slice((pageNumber - 1) * 8, (pageNumber * 8))
+    const slicedListings = list.slice((pageNumber - 1) * 8, (pageNumber * 8))
     // commit to store
-    $store.commit('localStorage/totalPages', Math.ceil(assets.length / 8))
-    $store.commit('localStorage/sortListing', slicedListings)
-    $store.commit('localStorage/listing', slicedListings)
+    await $store.commit('localStorage/totalPages', Math.ceil(list.length / 8))
+    await $store.commit('localStorage/listing', slicedListings)
+    await $store.commit('localStorage/popularListing', slicedListings)
   } else {
-    $store.commit('localStorage/sortListing', assets)
-    $store.commit('localStorage/listing', assets)
+    await $store.commit('localStorage/listing', list)
+    await $store.commit('localStorage/popularListing', list)
   }
 }
 

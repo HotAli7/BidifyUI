@@ -6,7 +6,7 @@ export const state = () => ({
   },
   listings: {
     list: [],
-    sortedList: [],
+    popularList: [],
     owned: [],
     nfts: [],
     active: null,
@@ -31,8 +31,8 @@ export const mutations = {
   listing (state, list) {
     state.listings.list = list
   },
-  sortListing (state, list) {
-    state.listings.sortedList = list.sort((a, b) => b.bids.length - a.bids.length)
+  popularListing (state, list) {
+    state.listings.popularList = list.slice().sort((a, b) => b.bids.length - a.bids.length)
   },
   owned (state, owned) {
     state.listings.owned = owned

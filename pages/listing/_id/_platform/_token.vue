@@ -158,6 +158,8 @@
           </div>
         </div>
       </section>
+      <!-- Page Footer-->
+      <Footer />
     </div>
   </div>
 </template>
@@ -331,14 +333,8 @@ export default {
       this.$store.commit('bidify/error', false)
       this.$store.commit('bidify/bidding', false)
     },
-    async refetchListing () {
-      const listings = require('~/plugins/listings.js')
-
-      this.$nuxt.$loading.start()
-
-      await listings.getOne(this)
-
-      this.$nuxt.$loading.finish()
+    refetchListing () {
+      this.$router.go()
     }
   }
 }

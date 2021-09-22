@@ -57,7 +57,7 @@
                       </div>
                     </div>
                   </div>
-                  <el-dropdown-item divided command="disconnect">
+                  <el-dropdown-item divided command="disconnect" class="text-center">
                     Disconnect
                   </el-dropdown-item>
                 </el-dropdown-menu>
@@ -96,7 +96,7 @@
                 </li>
               </ul>
               <div class="balance">
-                <div class="simple-list">
+                <div v-if="connected" class="simple-list">
                   <h5>
                     Wallet
 
@@ -112,7 +112,13 @@
                       <span>{{ balances.ether }} ETH</span>
                     </div>
                   </div>
+                  <el-dropdown-item divided command="disconnect" class="text-center">
+                    Disconnect
+                  </el-dropdown-item>
                 </div>
+                <el-button v-else :round="true" @click="connect()">
+                  Connect
+                </el-button>
               </div>
             </el-dropdown-menu>
           </el-dropdown>

@@ -45,7 +45,7 @@
           </p>
           <div class="live-auctions auction-list">
             <div class="row">
-              <div v-for="item in liveAuction" :key="item.listing_id" class="col-md-3">
+              <div v-for="item in liveAuction" :key="item.listing_id" class="col-xl-3 col-md-6">
                 <CardB :item="item" />
               </div>
             </div>
@@ -85,7 +85,7 @@
           </p>
           <div class="popular-auctions auction-list">
             <div class="row">
-              <div v-for="item in popularAuction" :key="item.listing_id" class="col-md-3">
+              <div v-for="item in popularAuction" :key="item.listing_id" class="col-xl-3 col-md-6">
                 <Card :item="item" />
               </div>
             </div>
@@ -100,7 +100,7 @@
           </h3>
           <div class="new-auctions auction-list mb-4">
             <div class="row">
-              <div v-for="item in list.slice(list.length - 4, list.length)" :key="item.listing_id" class="col-md-3">
+              <div v-for="item in list.slice(0, 4)" :key="item.listing_id" class="col-xl-3 col-md-6">
                 <CardB :item="item" />
               </div>
             </div>
@@ -144,7 +144,7 @@ export default {
       return liveAuctions.length < 5 ? liveAuctions : liveAuctions.slice(liveAuctions.length - 4, liveAuctions.length)
     },
     popularAuction () {
-      const popularAuctions = this.$store.state.localStorage.listings.sortedList
+      const popularAuctions = this.$store.state.localStorage.listings.popularList
       return popularAuctions.length < 5 ? popularAuctions : popularAuctions.slice(0, 4)
     }
   },

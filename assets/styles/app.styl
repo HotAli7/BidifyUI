@@ -352,7 +352,7 @@ footer.footer
     img
       width 100%
       height 100%
-      object-fit cover
+      object-fit contain
   .auction-content
     color white
     .auction-meta
@@ -492,7 +492,7 @@ footer.footer
     font-size 1.25rem
     color white
     table
-      display: inline-block;
+      display: table;
       width: 100%;
       overflow: auto;
       thead
@@ -564,6 +564,12 @@ section.error
 .mobile-nav
   display none !important
 
+.balance
+  .label
+    padding 0
+    small
+      color #333333
+
 footer.footer .footer-logo
   width 100%
   img
@@ -589,11 +595,12 @@ footer.footer .footer-logo
           color #F79420
   .balance
     padding 5px
-    padding-top 25px !important
-    border-top 1px solid #333333
-    .label
-      small
-        color #333333
+    padding-top 15px !important
+    border-top 1px solid #f0f0f0
+    .el-button
+      width 100% !important
+      background transparent !important
+      color #333333 !important
 
   .hero-image
     display none !important
@@ -633,3 +640,5 @@ footer.footer .footer-logo
 
   .bidify-button
     font-size 1.15rem !important
+  .bidify-data-section .section-container table
+    display inline-block
