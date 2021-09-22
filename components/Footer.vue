@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row align-items-center">
         <div class="col-md-3">
           <div class="copyright">
             &copy; 2021 Bidify
