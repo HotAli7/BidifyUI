@@ -283,7 +283,7 @@ export default {
       return new RealtimeCountdown({ timeStamp, onCountInitialized, onCount, onCountEnd })
     },
     async startBid () {
-      if (this.bidAmount < this.form.nextBid) {
+      if (this.bidAmount < this.auction.nextBid) {
         alert('Bid amount should be more than next bid amount!')
         return false
       }
@@ -293,7 +293,7 @@ export default {
 
       const payload = {
         $store: this.$store,
-        id: this.form.listing_id,
+        id: this.auction.listing_id,
         bidAmount: this.bidAmount
       }
       try {
@@ -302,7 +302,7 @@ export default {
         if (result) {
           const successPayload = {
             type: 'bid',
-            auction: this.form
+            auction: this.auction
           }
 
           this.$store.commit('bidify/successModal', successPayload)
@@ -316,9 +316,10 @@ export default {
       const listings = require('~/plugins/listings.js')
 
       this.loading = true
+      console.log(this.auction)
       const payload = {
         $store: this.$store,
-        id: this.form.listing_id
+        id: this.auction.listing_id
       }
 
       try {
@@ -326,7 +327,7 @@ export default {
 
         const successPayload = {
           type: 'finish',
-          auction: this.form
+          auction: this.auction
         }
         this.$store.commit('bidify/successModal', successPayload)
       } catch (error) {

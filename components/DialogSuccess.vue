@@ -34,14 +34,30 @@
                     </h5>
                     <p v-if="form.type==='bid'">You are now the highest bidder on <span class="auction-name-color">{{ form.auction.name }}</span> good luck.</p>
                     <p v-else-if="form.type === 'finish'&&highBidder">You have won <span class="auction-name-color">{{ form.auction.name }}</span>, Your winning bid was {{ form.auction.currentBid }}, Flex your new NFT on your social media following</p>
-                    <p v-else>You have listed <span class="auction-name-color">{{ form.auction.name }}</span>, your auction will last 1 day.</p>
+                    <p v-else-if="form.type === 'finish'">Someone have won <span class="auction-name-color">{{ form.auction.name }}</span>, His winning bid was {{ form.auction.currentBid }}.</p>
+                    <p v-else-if="form.type === 'list'">You have listed <span class="auction-name-color">{{ form.auction.name }}</span>, your auction will last 1 day.</p>
                   </div>
                 </div>
               </div>
               <div class="social-share-links">
                 <ul>
-                  <li>
+                  <li v-if="form.type==='bid'">
                     <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }&text=I just bid on an NFT, check it out! price=${ form.auction.currentBid }ETH`" target="_blank">
+                      <img src="~/assets/icons/icon-twitter.svg" alt="">
+                    </a>
+                  </li>
+                  <li v-else-if="form.type === 'finish'&&highBidder">
+                    <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }&text=I just won an NFT on Bidify price=${ form.auction.currentBid }ETH`" target="_blank">
+                      <img src="~/assets/icons/icon-twitter.svg" alt="">
+                    </a>
+                  </li>
+                  <li v-else-if="form.type === 'finish'">
+                    <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }&text=`" target="_blank">
+                      <img src="~/assets/icons/icon-twitter.svg" alt="">
+                    </a>
+                  </li>
+                  <li v-else-if="form.type === 'list'">
+                    <a :href="`https://twitter.com/intent/tweet?url=http://176.223.141.40/listing/${ form.auction.listing_id }/${ form.auction.platform }/${ form.auction.token }&text=I just listed on an NFT, check it out! price=${ form.auction.currentBid }ETH`" target="_blank">
                       <img src="~/assets/icons/icon-twitter.svg" alt="">
                     </a>
                   </li>
@@ -76,7 +92,7 @@ export default {
   computed: {
     highBidder () {
       const account = this.$store.state.wallets.account
-      const highBidder = this.auction.highBidder
+      const highBidder = this.form.highBidder
 
       return ((account && highBidder) && (account.toLowerCase() === highBidder.toLowerCase()))
     },

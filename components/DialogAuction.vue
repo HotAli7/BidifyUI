@@ -8,7 +8,7 @@
       <el-button class="btn-close" type="default" circle @click="cancel()">
         <i class="el-icon-close icon" />
       </el-button>
-      <section v-if="time === 'Open'" class="auction-container">
+      <section v-if="!form.paidOut" class="auction-container">
         <div class="container">
           <div class="row">
             <div class="col-12">
