@@ -12,7 +12,9 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <h4 class="success-title text-center">Congratulations</h4>
+              <h4 class="success-title text-center">
+                Congratulations
+              </h4>
             </div>
             <div class="col-12">
               <div class="auction-image">
@@ -32,10 +34,18 @@
                     <h5 class="auction-name">
                       {{ form.auction.name }}
                     </h5>
-                    <p v-if="form.type==='bid'">You are now the highest bidder on <span class="auction-name-color">{{ form.auction.name }}</span> good luck.</p>
-                    <p v-else-if="form.type === 'finish'&&highBidder">You have won <span class="auction-name-color">{{ form.auction.name }}</span>, Your winning bid was {{ form.auction.currentBid }}, Flex your new NFT on your social media following</p>
-                    <p v-else-if="form.type === 'finish'">Someone have won <span class="auction-name-color">{{ form.auction.name }}</span>, His winning bid was {{ form.auction.currentBid }}.</p>
-                    <p v-else-if="form.type === 'list'">You have listed <span class="auction-name-color">{{ form.auction.name }}</span>, your auction will last 1 day.</p>
+                    <p v-if="form.type==='bid'" class="text-justify text-center">
+                      You are now the highest bidder on <span class="auction-name-color">{{ form.auction.name }}</span> good luck.
+                    </p>
+                    <p v-else-if="form.type === 'finish'&&highBidder" class="text-justify text-center">
+                      You have won <span class="auction-name-color">{{ form.auction.name }}</span>, Your winning bid was {{ form.auction.currentBid }}, Flex your new NFT on your social media following
+                    </p>
+                    <p v-else-if="form.type === 'finish'" class="text-justify text-center">
+                      Someone have won <span class="auction-name-color">{{ form.auction.name }}</span>, His winning bid was {{ form.auction.currentBid }}.
+                    </p>
+                    <p v-else-if="form.type === 'list'" class="text-justify text-center">
+                      You have listed <span class="auction-name-color">{{ form.auction.name }}</span>, your auction will last 1 day.
+                    </p>
                   </div>
                 </div>
               </div>
