@@ -316,7 +316,7 @@ export default {
       const listings = require('~/plugins/listings.js')
 
       this.loading = true
-      console.log(this.auction)
+
       const payload = {
         $store: this.$store,
         id: this.auction.listing_id

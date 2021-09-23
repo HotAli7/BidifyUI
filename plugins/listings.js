@@ -78,23 +78,10 @@ async function addAssetsToListings (listings) {
  * @param {array} nfts { platform, token } to transform
  * @memberof listings
  */
-function removeDuplications (assets) {
-  return assets.filter((asset, i) => {
-    if (i === 0) {
-      return true
-    }
-    return (asset.address !== assets[i - 1].address)
-  })
-}
 async function addAssetsToNfts (nfts) {
   const seaport = require('~/plugins/opensea.js')
 
-  const assetList = removeDuplications(nfts.map((l) => {
-    return {
-      token_id: l.token,
-      address: l.platform
-    }
-  }))
+  const assetList = nfts
 
   const assets = transformAssets(await seaport.getAssets(assetList))
 

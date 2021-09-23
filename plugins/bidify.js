@@ -183,16 +183,7 @@ export async function getNFTs() {
       '0x' + from.split('0x')[1].padStart(64, '0')
     ]
   })
-  const mintLogs = await web3.eth.getPastLogs({
-    fromBlock: 0,
-    toBlock: 'latest',
-    topics: [
-      '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',      
-      '0x' + from.split('0x')[1].padStart(64, '0'),
-      '0x' + from.split('0x')[1].padStart(64, '0')
-    ]
-  })
-  logs = logs.concat(mintLogs)
+
   // Filter to just tokens which are still in our custody
   const res = []
   const ids = {}
@@ -223,7 +214,7 @@ export async function getNFTs() {
 
     ids[jointID] = true
 
-    res.push({ platform, token })
+    res.push({ address: platform, token_id: token })
   }
 
   return res
