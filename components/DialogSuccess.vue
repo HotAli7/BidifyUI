@@ -102,7 +102,7 @@ export default {
   computed: {
     highBidder () {
       const account = this.$store.state.wallets.account
-      const highBidder = this.form.highBidder
+      const highBidder = this.form.auction.highBidder
 
       return ((account && highBidder) && (account.toLowerCase() === highBidder.toLowerCase()))
     },
