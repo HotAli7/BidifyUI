@@ -77,7 +77,7 @@
                   <button v-if="!form.paidOut && time === 'Closed'&&!loading" class="btn bidify-button finish-button" @click="!loading && finishBid()">
                     Finish
                   </button>
-                  <span v-else-if="loading">Loading ...</span>
+                  <span v-else-if="!form.paidOut && time === 'Closed'&&loading">Loading ...</span>
                   <span v-if="form.paidOut">
                     Finished
                   </span>
