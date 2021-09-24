@@ -122,7 +122,7 @@ export default {
 
         const successPayload = {
           type: 'list',
-          auction: listModal
+          auction: list
         }
         this.$store.commit('bidify/successModal', successPayload)
       } catch (error) {

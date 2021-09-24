@@ -287,6 +287,7 @@ export async function getListing (id) {
   }
 
   let raw = await Bidify.methods.getListing(id).call()
+
   let currency = nullIfZeroAddress(raw.currency)
 
   let highBidder = nullIfZeroAddress(raw.highBidder)
@@ -418,6 +419,7 @@ export async function getListings(creator, platform) {
   })) {
     res.push((new web3.utils.BN(listing.topics[1].substr(2), 'hex')).toString())
   }
+
   return res
 }
 

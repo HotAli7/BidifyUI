@@ -77,7 +77,7 @@
         <div class="container">
           <div class="new-auctions auction-list mb-4">
             <div class="row">
-              <div v-for="item in list" :key="item.listing_id" class="col-xl-3 col-md-6">
+              <div v-for="(item, index) in list" :key="index" class="col-xl-3 col-md-6">
                 <Card :item="item" />
               </div>
             </div>

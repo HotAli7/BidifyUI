@@ -46,7 +46,7 @@
           </p>
           <div class="live-auctions auction-list">
             <div class="row">
-              <div v-for="item in liveAuction" :key="item.listing_id" class="col-xl-3 col-md-6">
+              <div v-for="(item, index) in liveAuction" :key="index" class="col-xl-3 col-md-6">
                 <CardB :item="item" />
               </div>
             </div>
@@ -83,7 +83,7 @@
           </p>
           <div class="popular-auctions auction-list">
             <div class="row">
-              <div v-for="item in popularAuction" :key="item.listing_id" class="col-xl-3 col-md-6">
+              <div v-for="(item, index) in popularAuction" :key="index" class="col-xl-3 col-md-6">
                 <Card :item="item" />
               </div>
             </div>
@@ -98,7 +98,7 @@
           </h3>
           <div class="new-auctions auction-list mb-4">
             <div class="row">
-              <div v-for="item in list.slice(0, 4)" :key="item.listing_id" class="col-xl-3 col-md-6">
+              <div v-for="(item, index) in list.slice(0, 4)" :key="index" class="col-xl-3 col-md-6">
                 <CardB :item="item" />
               </div>
             </div>

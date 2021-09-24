@@ -77,7 +77,7 @@
         <div class="container">
           <div class="new-auctions auction-list mb-4">
             <div class="row">
-              <div v-for="item in owned" :key="item.listing_id" class="col-xl-3 col-md-6">
+              <div v-for="(item, index) in owned" :key="index" class="col-xl-3 col-md-6">
                 <Card :item="item" />
               </div>
             </div>
@@ -91,7 +91,7 @@
               Not Listed
             </h3>
             <div class="row">
-              <div v-for="item in nfts" :key="item.listing_id" class="col-xl-3 col-md-6">
+              <div v-for="(item, index) in nfts" :key="index" class="col-xl-3 col-md-6">
                 <NFTCard :item="item" />
               </div>
             </div>
