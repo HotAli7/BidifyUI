@@ -177,6 +177,7 @@ export async function getNFTs() {
   let logs = await web3.eth.getPastLogs({
     fromBlock: 0,
     toBlock: 'latest',
+    address: settings.platformAddress,
     topics: [
       '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
       null,
@@ -195,7 +196,9 @@ export async function getNFTs() {
     }
 
     let platform = log.address
-
+    if (platform !== '0x68cc7260288377d68a32ee3e44defc6f2c6ccbc9') {
+      continue
+    }
     let token = log.topics[3]
 
     let owner = await (new web3.eth.Contract(ERC721JSON, platform)).methods.ownerOf(token).call()
@@ -400,9 +403,11 @@ export async function getListings(creator, platform) {
     creatorTopic = '0x' + creator.substr(2).toLowerCase().padStart(64, '0')
   }
 
-  let platformTopic = null
+  let platformTopic = settings.platformAddress
   if (platform) {
     platformTopic = '0x' + platform.substr(2).toLowerCase().padStart(64, '0')
+  } else {
+    platformTopic = '0x' + platformTopic.substr(2).toLowerCase().padStart(64, '0')
   }
 
   let res = []
@@ -419,7 +424,6 @@ export async function getListings(creator, platform) {
   })) {
     res.push((new web3.utils.BN(listing.topics[1].substr(2), 'hex')).toString())
   }
-
   return res
 }
 

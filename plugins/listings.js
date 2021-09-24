@@ -119,10 +119,9 @@ export async function get ({ $store, $route }) {
   const pageNumber = $route.params.number
   // get bidify listings
   const listings = await bidify.getListings()
-
   // get bidify listing for each
-  for (const i in listings) {
-    listings[i] = await bidify.getListing(i)
+  for (let i = 0; i < listings.length; i++) {
+    listings[i] = await bidify.getListing(listings[i])
   }
 
   // get assets and merge data
@@ -171,8 +170,9 @@ export async function getOwnedListings ({ $store }) {
   const myListings = await bidify.getListings(account)
 
   const listings = await bidify.getListings()
-  for (const i in listings) {
-    listings[i] = await bidify.getListing(i)
+
+  for (let i = 0; i < listings.length; i++) {
+    listings[i] = await bidify.getListing(listings[i])
   }
 
   // get assets and merge data
@@ -193,6 +193,7 @@ export async function getOwnedListings ({ $store }) {
   for (let i = 0; i < myListings.length; i++) {
     myListings[i] = await bidify.getListing(myListings[i])
   }
+
   // get assets and merge data
   const assets = await addAssetsToListings(myListings)
 

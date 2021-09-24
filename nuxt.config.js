@@ -58,6 +58,7 @@ export default {
     openseaURL: process.env.OPENSEA_URL || 'https://rinkeby-api.opensea.io/api/v1/',
     openseaAssetsURL: process.env.OPENSEA_ASSETS_URL || '${openseaURL}assets',
     bidifyAddress: process.env.BIDIFY_ADDRESS || '0x138c81d54cbd016d524757d26bfdbf4addb8f808', //'0x451d44624D29874A0Ba90bD902D2BD95CCD3A48d',
+    platformAddress: process.env.BIDIFY_ADDRESS || '0x68cc7260288377d68a32ee3e44defc6f2c6ccbc9', //'0x451d44624D29874A0Ba90bD902D2BD95CCD3A48d',
     nftAddress: process.env.NFT_ADDRESS || '0x22315052952395e072469048330716659b27d857',
     validChains: process.env.VALID_CHAINS || ['0x4', 'rinkeby', 4], // '0x1', 'main', 1,
     chainNames: process.env.CHAIN_NAMES || ['Rinkeby'] // 'Mainnet'
