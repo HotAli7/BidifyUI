@@ -40,6 +40,9 @@
         <button v-if="time !== 'Ended'" type="button" class="btn btn-block bidify-button bid-button" @click="showAuction($event)">
           place a bid
         </button>
+        <button v-else-if="!item.paidOut" type="button" class="btn btn-block bidify-button bid-button" @click="showAuction($event)">
+          Finish
+        </button>
         <span v-else class="btn btn-block ended-button" @click="showAuction($event)">
           {{ time }}
         </span>

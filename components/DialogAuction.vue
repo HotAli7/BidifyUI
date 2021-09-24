@@ -23,7 +23,10 @@
               <div class="auction-content">
                 <div class="auction-meta mb-0">
                   <div class="auction-info">
-                    <h5 class="auction-name">
+                    <h5 v-if="!nameExpand" class="auction-name collapse-name" @click="expandNameFunc(true)">
+                      {{ form.name }}
+                    </h5>
+                    <h5 v-else class="auction-name expand-name" @click="expandNameFunc(false)">
                       {{ form.name }}
                     </h5>
                     <h5 class="collection-name">
@@ -168,7 +171,8 @@ export default {
       seconds: 0,
       bidAmount: 0,
       loading: false,
-      timer: null
+      timer: null,
+      nameExpand: false
     }
   },
   computed: {
@@ -234,6 +238,10 @@ export default {
   methods: {
     cancel () {
       this.timer.destroy()
+      this.days = 0
+      this.hours = 0
+      this.minutes = 0
+      this.seconds = 0
       this.$store.commit('bidify/auctionModal', false)
     },
     setTimeLeft (t) {
@@ -311,6 +319,9 @@ export default {
     },
     refetchListing () {
       this.$router.go()
+    },
+    expandNameFunc (flag) {
+      this.nameExpand = flag
     }
   }
 }
