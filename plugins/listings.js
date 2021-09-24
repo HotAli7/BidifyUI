@@ -190,11 +190,12 @@ export async function getOwnedListings ({ $store }) {
   })
 
   // get bidify listing for each
-  for (const i in myListings) {
-    myListings[i] = await bidify.getListing(i)
+  for (let i = 0; i < myListings.length; i++) {
+    myListings[i] = await bidify.getListing(myListings[i])
   }
   // get assets and merge data
   const assets = await addAssetsToListings(myListings)
+
   const myAssets = assets.concat(myBidListings)
 
   // commit to store
@@ -265,13 +266,14 @@ export async function list ({ $store, params }) {
   $store.commit('bidify/listing', true)
   $store.commit('bidify/signing', false)
 
-  const listing = await bidify.list(params)
+  let listing = await bidify.list(params)
+  listing = await bidify.getListing(listing)
 
   const assets = await addAssetsToListings([listing])
 
   $store.commit('bidify/listing', false)
 
-  return assets
+  return assets[0]
 }
 
 /**
