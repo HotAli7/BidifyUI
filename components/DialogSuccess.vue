@@ -41,7 +41,7 @@
                       You have won <span class="auction-name-color">{{ form.auction.name }}</span>, Your winning bid was {{ form.auction.currentBid }}, Flex your new NFT on your social media following
                     </p>
                     <p v-else-if="form.type === 'finish'">
-                      Someone have won <span class="auction-name-color">{{ form.auction.name }}</span>, His winning bid was {{ form.auction.currentBid }}.
+                      Someone has won <span class="auction-name-color">{{ form.auction.name }}</span>, His winning bid was {{ form.auction.currentBid }}.
                     </p>
                     <p v-else-if="form.type === 'list'">
                       You have listed <span class="auction-name-color">{{ form.auction.name }}</span>, your auction will last 1 day.

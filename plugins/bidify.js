@@ -184,7 +184,6 @@ export async function getNFTs() {
       '0x' + from.split('0x')[1].padStart(64, '0')
     ]
   })
-
   // Filter to just tokens which are still in our custody
   const res = []
   const ids = {}
@@ -196,7 +195,7 @@ export async function getNFTs() {
     }
 
     let platform = log.address
-    if (platform !== '0x68cc7260288377d68a32ee3e44defc6f2c6ccbc9') {
+    if (platform.toUpperCase() !== settings.platformAddress.toUpperCase()) {
       continue
     }
     let token = log.topics[3]
