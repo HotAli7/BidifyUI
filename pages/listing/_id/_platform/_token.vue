@@ -86,9 +86,10 @@
                       place a bid
                     </button>
                   </div>
-                  <button v-if="!auction.paidOut && time === 'Closed'" class="btn bidify-button finish-button" @click="finishBid()">
+                  <button v-if="!form.paidOut && time === 'Closed'&&!loading&&highBidder" class="btn bidify-button finish-button" @click="!loading && finishBid()">
                     Finish
                   </button>
+                  <span v-else-if="!form.paidOut && time === 'Closed'&&loading">Loading ...</span>
                   <span v-if="auction.paidOut">
                     Finished
                   </span>
